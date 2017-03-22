@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MoldCreateApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="selected_mold_01_title">아스페르길루스 오리제</string>
+    <string name="selected_mold_02_title">곰팡이2 이름</string>
+    <string name="selected_mold_03_title">곰팡이3 이름</string>
+    <string name="selected_mold_04_title">곰팡이4 이름</string>
+
+    <string name="selected_mold_01_desc">된장,간장류 제조에 사용하는 누룩,곰팡이의 대표 균으로 단백질 분해 효소 생선 능력이 뛰어난 균입니다. 설명1</string>
+    <string name="selected_mold_02_desc">Sporangium(포자낭)이 columella(중축)를 완전히 둘러싸지 않고 중간쯤부터 둘러싸기 때문에 포자낭이 중축모양으로 인하여 아치형문처럼 보이는데서 유래. 설명2</string>
+    <string name="selected_mold_03_desc">Lichtheimia corymbifera가 표준종이며 37도씨에서도 잘 자라는 고온성 균 그룹으로 최근에 Absidia속 으로부터 독립됨. 설명3</string>
+    <string name="selected_mold_04_desc">메주, 누룩 등에서 마치 솜사탕처럼 흰색으로 뭉실뭉실 자라므로 솜사탕곰팡이로 명명하기를 제안 설명4</string>
+
+</resources>

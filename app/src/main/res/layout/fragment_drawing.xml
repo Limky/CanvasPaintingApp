@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sqisoft.moldcreateapp.Fragment.FragmentDrawing">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:layout_toLeftOf="@+id/submit_mold_button"
+        android:layout_toStartOf="@+id/submit_mold_button">
+
+        <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_width="400dp"
+            android:layout_height="400dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:background="#B3E5FC"
+                android:layout_width="200dp"
+                android:layout_height="200dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textAlignment="center"
+                    android:background="#B2DFDB"
+                    android:text="색상그라데이션"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp" />
+
+                <TextView
+                    android:textAlignment="center"
+                    android:background="#C5CAE9"
+                    android:text="색상 파레트"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+    <Button
+        android:background="#B2DFDB"
+        android:text="NEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/submit_mold_button"
+        android:width="160dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

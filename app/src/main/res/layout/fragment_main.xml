@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sqisoft.moldcreateapp.Fragment.FragmentMain">
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/create_mold_button"
+        android:layout_toStartOf="@+id/create_mold_button">
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 곰팡이를 만들어 보세요."
+            android:textSize="30dp"
+            android:id="@+id/mold_intro_title_textView" />
+
+        <ImageView
+            android:paddingTop="80dp"
+            android:paddingBottom="80dp"
+            android:layout_gravity="center"
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mold_main_03"/>
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="예쁜 곰팡이를 만들어 전송하면\nDisplay에서 나만의 곰팡이가 피어납니다."
+            android:textSize="20dp"
+            android:id="@+id/mold_intro_desc_textView" />
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:background="#B2DFDB"
+        android:text="Start"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/create_mold_button"
+        android:width="160dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+
+
+</RelativeLayout>
