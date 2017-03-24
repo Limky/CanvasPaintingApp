@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
-        android:layout_toLeftOf="@+id/submit_mold_button"
-        android:layout_toStartOf="@+id/submit_mold_button">
+        android:layout_toLeftOf="@+id/waiting_mold_button"
+        android:layout_toStartOf="@+id/waiting_mold_button">
 
         <LinearLayout
             android:layout_centerHorizontal="true"
@@ -60,7 +60,7 @@
         android:text="NEXT"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/submit_mold_button"
+        android:id="@+id/waiting_mold_button"
         android:width="160dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

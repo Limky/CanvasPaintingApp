@@ -4,24 +4,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.sqisoft.moldcreateapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FragmentDrawing.OnFragmentInteractionListener} interface
+ * {@link FragmentWaitng.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FragmentDrawing#newInstance} factory method to
+ * Use the {@link FragmentWaitng#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentDrawing extends Fragment {
+public class FragmentWaitng extends Fragment implements View.OnTouchListener, GestureDetector.OnGestureListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,12 +33,16 @@ public class FragmentDrawing extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private View mFragmentDrawingView;
-    private Button mWaitingButton;
+    private View mFragmentWaitngView;
 
-    public FragmentDrawing() {
+    TextView touchPad, textX, textY;
+    private GestureDetector gd;
+
+    public FragmentWaitng() {
         // Required empty public constructor
     }
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -46,11 +50,11 @@ public class FragmentDrawing extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentDrawing.
+     * @return A new instance of fragment FragmentWaitng.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentDrawing newInstance(String param1, String param2) {
-        FragmentDrawing fragment = new FragmentDrawing();
+    public static FragmentWaitng newInstance(String param1, String param2) {
+        FragmentWaitng fragment = new FragmentWaitng();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,37 +69,56 @@ public class FragmentDrawing extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       mFragmentDrawingView = inflater.inflate(R.layout.fragment_drawing, container, false);
+        mFragmentWaitngView = inflater.inflate(R.layout.fragment_waitng, container, false);
+
+
         attachViewAndListener();
-        // Inflate the layout for this fragment
+
+     //   ((MainActivity)DataManager.getInstance().getActivity()).connectSocket();
+
+        return mFragmentWaitngView;
 
 
-        return mFragmentDrawingView;
     }
 
     private void attachViewAndListener(){
-        mWaitingButton = (Button) mFragmentDrawingView.findViewById(R.id.waiting_mold_button);
+        textX = (TextView) mFragmentWaitngView.findViewById(R.id.text_X);
+        textY = (TextView) mFragmentWaitngView.findViewById(R.id.text_Y);
+        touchPad = (TextView) mFragmentWaitngView.findViewById(R.id.touch_pad);
 
-        mWaitingButton.setOnClickListener(mWaitingButtonistener);
-
+        touchPad.setOnTouchListener(this);
     }
 
-    private Button.OnClickListener mWaitingButtonistener = new Button.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            FragmentManager manager = getActivity().getSupportFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.replaced_layout, new FragmentWaitng()).commit();
-        }
-    };
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+       if(v.getId() == R.id.touch_pad)
+       {
+           textX.setText("X : "+Float.toString(event.getX()));
+           textY.setText("Y : "+Float.toString(event.getY()));
+
+           return true;
+
+       }
+
+        else
+        return false;
+    }
 
 
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -120,6 +143,37 @@ public class FragmentDrawing extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        return false;
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
