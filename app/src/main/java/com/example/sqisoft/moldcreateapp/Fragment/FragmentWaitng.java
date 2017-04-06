@@ -4,13 +4,18 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.sqisoft.moldcreateapp.Activity.MainActivity;
+import com.example.sqisoft.moldcreateapp.Manager.DataManager;
 import com.example.sqisoft.moldcreateapp.R;
 
 /**
@@ -37,6 +42,9 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
 
     TextView touchPad, textX, textY;
     private GestureDetector gd;
+
+    private Boolean mTouchFlag = false;
+    private ImageView imageView;
 
     public FragmentWaitng() {
         // Required empty public constructor
@@ -84,6 +92,10 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
 
      //   ((MainActivity)DataManager.getInstance().getActivity()).connectSocket();
 
+
+        ((MainActivity)DataManager.getInstance().getActivity()).sendToUnity((ImageView) mFragmentWaitngView.findViewById(R.id.sending_imageView));
+        imageView =  (ImageView) mFragmentWaitngView.findViewById(R.id.sending_imageView);
+
         return mFragmentWaitngView;
 
 
@@ -96,22 +108,88 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
 
         touchPad.setOnTouchListener(this);
     }
+    float dX, dY =0;
+
+    @Override
+    public boolean onTouch(View view, MotionEvent event) {
 
 
+        if(view.getId() == R.id.touch_pad)
+        {
+            mTouchFlag = true;
+            textX.setText("X : "+Float.toString(event.getX()));
+            textY.setText("Y : "+Float.toString(event.getY()));
+
+            Log.d("onTouch mTouchFlag = ",""+mTouchFlag);
+
+            imageView.setX(event.getX()-(imageView.getMeasuredWidth()/2));
+            imageView.setY(event.getY()-(imageView.getMeasuredHeight()/2));
+            imageView.setVisibility(View.VISIBLE);
+            if(event.getY() < 0 ){
+                imageView.setVisibility(View.INVISIBLE);
+
+            }
+
+            return true;
+        }
+
+        switch (event.getAction()) {
+
+            case MotionEvent.ACTION_DOWN:
+/*
+                dX = view.getX() - event.getRawX();
+                dY = view.getY() - event.getRawY();
+                textX.setText("X : "+dX);
+                textY.setText("Y : "+dY);*/
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+/*
+                view.animate()
+                        .x(event.getRawX() + dX)
+                        .y(event.getRawY() + dY)
+                        .setDuration(0)
+                        .start();
+                textX.setText("X : "+dX);
+                textY.setText("Y : "+dY);*/
+                break;
+            case MotionEvent.ACTION_UP:
+                Toast.makeText(getContext(), " 모션 ACTION_UP", Toast.LENGTH_SHORT).show();
+                mTouchFlag = false;
+                Log.d("unTouch mTouchFlag = ",""+mTouchFlag);
+                break;
+
+            default:
+                return false;
+        }
+        return true;
+    }
+
+
+
+/*
     @Override
     public boolean onTouch(View v, MotionEvent event) {
        if(v.getId() == R.id.touch_pad)
        {
+           mTouchFlag = true;
            textX.setText("X : "+Float.toString(event.getX()));
            textY.setText("Y : "+Float.toString(event.getY()));
+           Log.d("onTouch mTouchFlag = ",""+mTouchFlag);
 
            return true;
+       }else
 
-       }
 
-        else
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            // here we have the "untouch" event
+            mTouchFlag = false;
+            Log.d("unTouch mTouchFlag = ",""+mTouchFlag);
+
+        }
         return false;
-    }
+    }*/
 
 
 
@@ -189,4 +267,7 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+
 }

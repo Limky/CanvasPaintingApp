@@ -24,4 +24,11 @@
         android:text="Y 좌표"
         android:layout_gravity="center"/>
 
+    <ImageView
+        android:id="@+id/sending_imageView"
+        android:layout_width="224dp"
+        android:layout_height="224dp"
+        android:src="@drawable/moldicon"
+        />
+
 </FrameLayout>

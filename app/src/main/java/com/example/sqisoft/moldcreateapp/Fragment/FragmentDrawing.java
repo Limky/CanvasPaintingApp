@@ -4,14 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.sqisoft.moldcreateapp.R;
+import com.example.sqisoft.moldcreateapp.Util.FragmentUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,7 +73,7 @@ public class FragmentDrawing extends Fragment {
        mFragmentDrawingView = inflater.inflate(R.layout.fragment_drawing, container, false);
         attachViewAndListener();
         // Inflate the layout for this fragment
-
+        FragmentUtil.trace();
 
         return mFragmentDrawingView;
     }
@@ -89,9 +88,10 @@ public class FragmentDrawing extends Fragment {
     private Button.OnClickListener mWaitingButtonistener = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
-            FragmentManager manager = getActivity().getSupportFragmentManager();
+/*            FragmentManager manager = getActivity().getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.replaced_layout, new FragmentWaitng()).commit();
+            transaction.replace(R.id.replaced_layout, new FragmentWaitng()).commit();*/
+            FragmentUtil.addFragment(new FragmentWaitng());
         }
     };
 

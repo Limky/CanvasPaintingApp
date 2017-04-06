@@ -4,13 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sqisoft.moldcreateapp.R;
+import com.example.sqisoft.moldcreateapp.Util.FragmentUtil;
 
 
 /**
@@ -72,12 +71,15 @@ public class FragmentMain extends Fragment {
         // Inflate the layout for this fragment
         mMainFragmentView = inflater.inflate(R.layout.fragment_main, container, false);
 
+        FragmentUtil.trace();
+
         mMainFragmentView.findViewById(R.id.create_mold_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
+        /*        FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.replaced_layout, new FragmentSelecting()).commit();
+                transaction.replace(R.id.replaced_layout, new FragmentSelecting()).commit();*/
+                FragmentUtil.addFragment(new FragmentSelecting());
             }
         });
 
