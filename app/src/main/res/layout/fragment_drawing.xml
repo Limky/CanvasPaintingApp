@@ -5,6 +5,7 @@
     tools:context="com.example.sqisoft.moldcreateapp.Fragment.FragmentDrawing">
 
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,40 +13,40 @@
         android:layout_toLeftOf="@+id/waiting_mold_button"
         android:layout_toStartOf="@+id/waiting_mold_button">
 
+
+        <com.example.sqisoft.moldcreateapp.view.DrawingView
+            android:layout_gravity="center"
+            android:background="@drawable/drawing_view"
+            android:layout_width="600dp"
+            android:layout_height="600dp"
+            android:id="@+id/drawing_view" />
+
+
         <LinearLayout
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:orientation="horizontal"
-            android:layout_width="400dp"
-            android:layout_height="400dp">
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:layout_width="450dp"
+            android:layout_height="match_parent">
 
             <ImageView
-                android:layout_gravity="center"
-                android:background="#B3E5FC"
-                android:layout_width="200dp"
-                android:layout_height="200dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="300dp"
+                android:src="@drawable/seletedpaintcolor"/>
 
-                <TextView
-                    android:textAlignment="center"
-                    android:background="#B2DFDB"
-                    android:text="색상그라데이션"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp" />
-
-                <TextView
-                    android:textAlignment="center"
-                    android:background="#C5CAE9"
-                    android:text="색상 파레트"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp" />
-
-            </LinearLayout>
-
+            <com.example.sqisoft.moldcreateapp.view.HeaderGridView
+                android:numColumns="5"
+                android:id="@+id/colorpicker_list"
+                android:layout_height="wrap_content"
+                android:layout_width="380dp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:scrollbars="none"
+                android:layout_marginRight="100dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginTop="27dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
         </LinearLayout>
 

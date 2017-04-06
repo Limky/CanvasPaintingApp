@@ -8,9 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
+import com.example.sqisoft.moldcreateapp.Manager.DataManager;
 import com.example.sqisoft.moldcreateapp.R;
 import com.example.sqisoft.moldcreateapp.Util.FragmentUtil;
+import com.example.sqisoft.moldcreateapp.view.ColorPickerGridViewAdapter;
+import com.example.sqisoft.moldcreateapp.view.DrawingView;
+import com.example.sqisoft.moldcreateapp.view.HeaderGridView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +39,15 @@ public class FragmentDrawing extends Fragment {
 
     private View mFragmentDrawingView;
     private Button mWaitingButton;
+
+    private ImageButton img;
+    private boolean isSelected = false;
+
+    private HeaderGridView gridView;
+    private ColorPickerGridViewAdapter mColorPickerGridViewAdapter;
+
+    private DrawingView mDrawingView;
+
 
     public FragmentDrawing() {
         // Required empty public constructor
@@ -75,22 +89,33 @@ public class FragmentDrawing extends Fragment {
         // Inflate the layout for this fragment
         FragmentUtil.trace();
 
+
+        addBaseAdapter();
+
+        DataManager.getInstance().setmDrawingView(mDrawingView);
+
         return mFragmentDrawingView;
     }
 
+
+    private void addBaseAdapter(){
+        gridView = (HeaderGridView) mFragmentDrawingView.findViewById(R.id.colorpicker_list);
+        mColorPickerGridViewAdapter = new ColorPickerGridViewAdapter(this,getContext());
+        gridView.setAdapter(mColorPickerGridViewAdapter);
+    }
+
+
     private void attachViewAndListener(){
         mWaitingButton = (Button) mFragmentDrawingView.findViewById(R.id.waiting_mold_button);
-
         mWaitingButton.setOnClickListener(mWaitingButtonistener);
+        mDrawingView = (DrawingView) mFragmentDrawingView.findViewById(R.id.drawing_view);
 
     }
 
     private Button.OnClickListener mWaitingButtonistener = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
-/*            FragmentManager manager = getActivity().getSupportFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.replaced_layout, new FragmentWaitng()).commit();*/
+
             FragmentUtil.addFragment(new FragmentWaitng());
         }
     };
