@@ -15,11 +15,27 @@
 
 
         <com.example.sqisoft.moldcreateapp.view.DrawingView
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:background="@drawable/drawing_view"
-            android:layout_width="600dp"
-            android:layout_height="600dp"
+            android:layout_width="550dp"
+            android:layout_height="550dp"
+            android:background="@drawable/moldoutline022"
             android:id="@+id/drawing_view" />
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_XX"
+            android:text="X 좌표"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_marginTop="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_YY"
+            android:text="Y 좌표"
+            android:layout_gravity="center"/>
 
 
         <LinearLayout

@@ -36,7 +36,7 @@ public class ColorManager {
         selected.setSize(100, 100);
         selected.setStroke(10, Color.parseColor("#D2D1D2"));
 
-        System.out.println("getSelectedColor. pos = "+mSeletedColor);
+   //     System.out.println("getSelectedColor. pos = "+mSeletedColor);
 
         DataManager.getInstance().getmDrawingView().setupDrawing();
         return selected;
@@ -52,7 +52,7 @@ public class ColorManager {
         unselected.setColor(Color.parseColor(mSeletedColor));
         unselected.setSize(100, 100);
 
-       System.out.println("getUnselectedColor. pos = "+mSeletedColor);
+     //  System.out.println("getUnselectedColor. pos = "+mSeletedColor);
 
         DataManager.getInstance().getmDrawingView().setupDrawing();
         return unselected;

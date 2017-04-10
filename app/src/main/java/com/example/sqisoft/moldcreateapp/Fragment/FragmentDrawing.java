@@ -1,6 +1,7 @@
 package com.example.sqisoft.moldcreateapp.Fragment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.sqisoft.moldcreateapp.Manager.DataManager;
 import com.example.sqisoft.moldcreateapp.R;
@@ -16,6 +18,8 @@ import com.example.sqisoft.moldcreateapp.Util.FragmentUtil;
 import com.example.sqisoft.moldcreateapp.view.ColorPickerGridViewAdapter;
 import com.example.sqisoft.moldcreateapp.view.DrawingView;
 import com.example.sqisoft.moldcreateapp.view.HeaderGridView;
+
+import java.io.File;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +52,7 @@ public class FragmentDrawing extends Fragment {
 
     private DrawingView mDrawingView;
 
+    TextView touchPad, textX, textY;
 
     public FragmentDrawing() {
         // Required empty public constructor
@@ -90,6 +95,11 @@ public class FragmentDrawing extends Fragment {
         FragmentUtil.trace();
 
 
+        textX = (TextView) mFragmentDrawingView.findViewById(R.id.text_XX);
+        textY = (TextView) mFragmentDrawingView.findViewById(R.id.text_YY);
+
+        DataManager.getInstance().setTextXY(textX,textY);
+
         addBaseAdapter();
 
         DataManager.getInstance().setmDrawingView(mDrawingView);
@@ -111,12 +121,16 @@ public class FragmentDrawing extends Fragment {
         mDrawingView = (DrawingView) mFragmentDrawingView.findViewById(R.id.drawing_view);
 
     }
+    private File filepath,externalFilePath;
 
     private Button.OnClickListener mWaitingButtonistener = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
 
-            FragmentUtil.addFragment(new FragmentWaitng());
+            mDrawingView.setDrawingCacheEnabled(true);
+            Bitmap b = mDrawingView.getDrawingCache();
+        //    DataManager.getInstance().setmCapturingBitmap(b.copy(b.getConfig(),true));
+            FragmentUtil.addFragment(new FragmentWaitng(b.copy(b.getConfig(),true) ));
         }
     };
 

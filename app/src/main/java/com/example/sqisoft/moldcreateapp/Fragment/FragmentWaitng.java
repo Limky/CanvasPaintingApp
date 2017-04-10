@@ -1,8 +1,10 @@
 package com.example.sqisoft.moldcreateapp.Fragment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -46,10 +48,19 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
     private Boolean mTouchFlag = false;
     private ImageView imageView;
 
+    private Bitmap mCapturingBitmap;
+    private Handler mHandler;
+
+    private boolean sendingCount = true;
+
     public FragmentWaitng() {
         // Required empty public constructor
     }
 
+    public FragmentWaitng(Bitmap caturingBitmap) {
+        // Required empty public constructor
+       mCapturingBitmap = caturingBitmap;
+    }
 
 
     /**
@@ -92,14 +103,19 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
 
      //   ((MainActivity)DataManager.getInstance().getActivity()).connectSocket();
 
-
-        ((MainActivity)DataManager.getInstance().getActivity()).sendToUnity((ImageView) mFragmentWaitngView.findViewById(R.id.sending_imageView));
         imageView =  (ImageView) mFragmentWaitngView.findViewById(R.id.sending_imageView);
+       imageView.setImageBitmap(mCapturingBitmap);
+
+
+       ((MainActivity) DataManager.getInstance().getActivity()).sendToUnity(imageView);
 
         return mFragmentWaitngView;
 
 
     }
+
+
+
 
     private void attachViewAndListener(){
         textX = (TextView) mFragmentWaitngView.findViewById(R.id.text_X);
@@ -125,7 +141,10 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
             imageView.setX(event.getX()-(imageView.getMeasuredWidth()/2));
             imageView.setY(event.getY()-(imageView.getMeasuredHeight()/2));
             imageView.setVisibility(View.VISIBLE);
-            if(event.getY() < 0 ){
+
+
+            if(event.getY() < 0 || event.getY() <340 ){
+
                 imageView.setVisibility(View.INVISIBLE);
 
             }
@@ -136,22 +155,11 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
         switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN:
-/*
-                dX = view.getX() - event.getRawX();
-                dY = view.getY() - event.getRawY();
-                textX.setText("X : "+dX);
-                textY.setText("Y : "+dY);*/
+
                 break;
 
             case MotionEvent.ACTION_MOVE:
-/*
-                view.animate()
-                        .x(event.getRawX() + dX)
-                        .y(event.getRawY() + dY)
-                        .setDuration(0)
-                        .start();
-                textX.setText("X : "+dX);
-                textY.setText("Y : "+dY);*/
+
                 break;
             case MotionEvent.ACTION_UP:
                 Toast.makeText(getContext(), " 모션 ACTION_UP", Toast.LENGTH_SHORT).show();
@@ -164,33 +172,6 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
         }
         return true;
     }
-
-
-
-/*
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-       if(v.getId() == R.id.touch_pad)
-       {
-           mTouchFlag = true;
-           textX.setText("X : "+Float.toString(event.getX()));
-           textY.setText("Y : "+Float.toString(event.getY()));
-           Log.d("onTouch mTouchFlag = ",""+mTouchFlag);
-
-           return true;
-       }else
-
-
-
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            // here we have the "untouch" event
-            mTouchFlag = false;
-            Log.d("unTouch mTouchFlag = ",""+mTouchFlag);
-
-        }
-        return false;
-    }*/
-
 
 
     @Override

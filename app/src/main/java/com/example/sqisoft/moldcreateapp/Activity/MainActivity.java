@@ -30,6 +30,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class MainActivity extends AppCompatActivity implements FragmentMain.OnFragmentInteractionListener,
         FragmentSelecting.OnFragmentInteractionListener, FragmentDrawing.OnFragmentInteractionListener,
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
     private BufferedReader networkReader;
     private BufferedWriter networkWriter;
 
-    private String ip = "192.168.2.200"; // IP
+    private String ip = "192.168.2.171"; // IP
     private int port = 6778; // PORT번호
 
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       DataManager.getInstance().setActivity(this);
+        DataManager.getInstance().setActivity(this);
 
 
         //프래그먼트 유틸(프래그먼트간 이동 공통 모듈) 초기화
@@ -67,18 +68,18 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
 
         FragmentUtil.addFragment(new FragmentMain());
 
-        mHandler = new Handler();
 
+        connectSocket();
+
+    }
+
+    public void connectSocket(){
 
         Thread thread = new Thread(new Runnable() {
-
             @Override
             public void run() {
                 try  {
-
-                        setSocket(ip, port);
-                        checkUpdate.start();
-                    //Your code goes here
+                    setSocket(ip, port);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -86,10 +87,8 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
         });
         thread.start();
 
-
-
-
     }
+
 
     private void disconnectSocket(){
         try {
@@ -113,53 +112,58 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
 
     }
 
-    private Runnable showUpdate = new Runnable() {
 
-        public void run() {
-          Toast.makeText(getApplicationContext(), "Coming word: " + html, Toast.LENGTH_SHORT).show();
-        }
-
-    };
-
-    private Thread checkUpdate = new Thread() {
-
-        public void run() {
-            try {
-                String line;
-                Log.w("ChattingStart", "Start Thread");
-                while (true) {
-                    Log.w("Chatting is running", "chatting is running");
-                    line = networkReader.readLine();
-                    html = line;
-                    mHandler.post(showUpdate);
-                }
-            } catch (Exception e) {
-
-            }
-        }
-    };
-
+    byte[] array;
+    OutputStream out = null;
+    ImageView mImageView;
     public void sendToUnity(ImageView imageView){
-        if(socket != null) {
-            Bitmap bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap(); //String str = et.getText().toString();
 
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-            byte[] array = bos.toByteArray();
+        mImageView = imageView;
+        Thread thread = new Thread(new Runnable() {
 
-            OutputStream out = null;
-            try {
-                String sendingMessage = "Hello HanSu";
-                out = socket.getOutputStream();
-                DataOutputStream dos = new DataOutputStream(out);
-                dos.writeInt(array.length);
-                dos.write(array, 0, array.length);
-                Log.w("Sending Image", "*******************************************");
-            } catch (IOException e) {
-                e.printStackTrace();
+            @Override
+            public void run() {
+                try {
+                    Log.w("******************************************* Sending Image", "*******************111************************");
+                    Bitmap bmp = ((BitmapDrawable) mImageView.getDrawable()).getBitmap(); //String str = et.getText().toString();
+
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    bmp.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+                    byte[] array = bos.toByteArray();
+                    OutputStream out = socket.getOutputStream();
+
+                    DataOutputStream dos = new DataOutputStream(out);
+                    dos.writeInt(array.length);
+                    dos.write(array, 0, array.length);
+                    dos.flush();
+                    dos.close();
+
+                    Log.w("******************************************* Sending Image", "**********************222*********************");
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+        });
+        thread.start();
+
+    }
+
+
+    public boolean checkSocketConnection() {
+
+        if (socket != null) {
+            Log.w("************************************* 소켓이 연결 되어 있습니다. ( O )", "*******************************************");
+            return true;
+        } else {
+            Log.w("************************************* 소켓이 연결이 되지 않았습니다. ( X )", "*******************************************");
+            return false;
         }
     }
+
 
 
 
@@ -210,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
     public void onBackPressed(){
         System.out.println("( RemoteCameraActivity Back Event )");
         // DataManager.getInstance().getActivity().onBackPressed();
-       backButtonFunction();
+        backButtonFunction();
 
     }
 
@@ -242,6 +246,8 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
         }
 
     }
+
+
 
 
 
