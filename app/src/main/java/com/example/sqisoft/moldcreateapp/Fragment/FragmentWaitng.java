@@ -2,6 +2,7 @@ package com.example.sqisoft.moldcreateapp.Fragment;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,13 +13,16 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sqisoft.moldcreateapp.Activity.MainActivity;
-import com.example.sqisoft.moldcreateapp.Manager.DataManager;
 import com.example.sqisoft.moldcreateapp.R;
+import com.example.sqisoft.moldcreateapp.data.ResponseListener;
+import com.example.sqisoft.moldcreateapp.domain.ResultSendingImage;
+import com.example.sqisoft.moldcreateapp.util.CommandUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +32,7 @@ import com.example.sqisoft.moldcreateapp.R;
  * Use the {@link FragmentWaitng#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentWaitng extends Fragment implements View.OnTouchListener, GestureDetector.OnGestureListener{
+public class FragmentWaitng extends Fragment implements View.OnTouchListener, GestureDetector.OnGestureListener, Animation.AnimationListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -51,7 +55,10 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
     private Bitmap mCapturingBitmap;
     private Handler mHandler;
 
-    private boolean sendingCount = true;
+    private boolean sendingFlag = true;
+    // Animation
+    private Animation animFadein, arrowBlink, moldBlink;
+    private ImageView arrow_imageview;
 
     public FragmentWaitng() {
         // Required empty public constructor
@@ -101,26 +108,38 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
 
         attachViewAndListener();
 
-     //   ((MainActivity)DataManager.getInstance().getActivity()).connectSocket();
+        attachAnimation();
 
         imageView =  (ImageView) mFragmentWaitngView.findViewById(R.id.sending_imageView);
-       imageView.setImageBitmap(mCapturingBitmap);
+        imageView.setImageBitmap(mCapturingBitmap);
 
-
-       ((MainActivity) DataManager.getInstance().getActivity()).sendToUnity(imageView);
+        arrow_imageview.startAnimation(arrowBlink);
+      //  imageView.startAnimation(animFadein);
+        imageView.startAnimation(moldBlink);
+      //  makeTransparent();
 
         return mFragmentWaitngView;
 
-
     }
 
+    private void attachAnimation(){
+        // load the animation
+        animFadein = AnimationUtils.loadAnimation(getActivity(),R.anim.fadein);
+        animFadein.setAnimationListener(this);
 
+        arrowBlink = AnimationUtils.loadAnimation(getActivity(),R.anim.arrow_blink);
+        arrowBlink.setAnimationListener(this);
+
+        moldBlink = AnimationUtils.loadAnimation(getActivity(),R.anim.mold_blink);
+        moldBlink.setAnimationListener(this);
+    }
 
 
     private void attachViewAndListener(){
         textX = (TextView) mFragmentWaitngView.findViewById(R.id.text_X);
         textY = (TextView) mFragmentWaitngView.findViewById(R.id.text_Y);
         touchPad = (TextView) mFragmentWaitngView.findViewById(R.id.touch_pad);
+        arrow_imageview = (ImageView) mFragmentWaitngView.findViewById(R.id.arrow_imageview);
 
         touchPad.setOnTouchListener(this);
     }
@@ -140,12 +159,30 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
 
             imageView.setX(event.getX()-(imageView.getMeasuredWidth()/2));
             imageView.setY(event.getY()-(imageView.getMeasuredHeight()/2));
-            imageView.setVisibility(View.VISIBLE);
+           // imageView.setVisibility(View.VISIBLE);
 
 
             if(event.getY() < 0 || event.getY() <340 ){
 
-                imageView.setVisibility(View.INVISIBLE);
+                if(sendingFlag) {
+                    Log.d("onTouch mTouchFlag ========== ",""+mTouchFlag);
+                    imageView.setVisibility(View.INVISIBLE);
+                       sendingFlag = false;
+
+                    CommandUtil.setMyPictureApi("SMA-60000",mCapturingBitmap, null, new ResponseListener<ResultSendingImage>() {
+                        @Override
+                        public void response(boolean success, ResultSendingImage data) {
+                            Log.d("onTouch mTouchFlag ========== ","setMyPictureApi 내부 진입");
+                            if (success && data != null) {
+                                    Log.w("==== data ====\n customName : ",""+data.getCustomFileName()+"\ncustomFileName : "+data.getCustomFileName()+"\ncustomFile : "+data.getCustomFile());
+
+
+                            }
+                        }
+                    });
+
+
+                }
 
             }
 
@@ -171,6 +208,17 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
                 return false;
         }
         return true;
+    }
+
+    public void makeTransparent() {
+
+        for(int x = 0; x<mCapturingBitmap.getWidth(); x++){
+            for(int y = 0; y<mCapturingBitmap.getHeight(); y++){
+                if(mCapturingBitmap.getPixel(x, y) == Color.TRANSPARENT){
+                    mCapturingBitmap.setPixel(x, y, Color.WHITE);
+                }
+            }
+        }
     }
 
 
@@ -231,6 +279,20 @@ public class FragmentWaitng extends Fragment implements View.OnTouchListener, Ge
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         return false;
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
     }
 
 

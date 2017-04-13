@@ -2,6 +2,7 @@ package com.example.sqisoft.moldcreateapp.view;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 
-import com.example.sqisoft.moldcreateapp.Manager.ColorManager;
-import com.example.sqisoft.moldcreateapp.Manager.DataManager;
 import com.example.sqisoft.moldcreateapp.R;
+import com.example.sqisoft.moldcreateapp.manager.ColorManager;
+import com.example.sqisoft.moldcreateapp.manager.DataManager;
 
 /**
  * Created by SQISOFT on 2017-04-06.
@@ -26,6 +27,7 @@ public class ColorPickerGridViewAdapter  extends BaseAdapter {
     private static int COLORPICKER_NUMBER = 20;
     private boolean[] isSelected = new boolean[COLORPICKER_NUMBER];
     private ImageButton[] mImageButtonList = new ImageButton[COLORPICKER_NUMBER];
+    private View mView;
 
     public ColorPickerGridViewAdapter(Fragment fragment , Context context){
         for(int i = 0 ; i < isSelected.length ; i++)
@@ -53,21 +55,28 @@ public class ColorPickerGridViewAdapter  extends BaseAdapter {
         return position;
     }
 
+    public boolean test = true;
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
         final Context context = parent.getContext();
+        mViewHolder = new ColorPickerHolder();
+
 
         if(convertView == null){
+
             convertView = mInflater.inflate(R.layout.color_radio_buttons,parent,false);
 
         //    Log.d("ddd","111");
-            mViewHolder = new ColorPickerHolder();
+
             mViewHolder.mImageButton = (ImageButton) convertView.findViewById(R.id.color_radio_button);
-           //mViewHolder.mImageButton.setBackgroundResource(R.drawable.colorpicker_unselected);
-         mViewHolder.mImageButton.setBackground(ColorManager.getInstance().getUnselectedColor(pos));
+
+             Log.w("mImageButtonList ================= ",""+pos);
+             mViewHolder.mImageButton.setBackground(ColorManager.getInstance().getUnselectedColor(pos));
 
             mViewHolder.mImageButton.setClickable(true);
+
 
             mImageButtonList[pos] =  mViewHolder.mImageButton;
 
@@ -87,32 +96,35 @@ public class ColorPickerGridViewAdapter  extends BaseAdapter {
 
                 if (isSelected[pos]) {
                 //선택안함
+
                     isSelected[pos] = false;
-                  v.setBackground(ColorManager.getInstance().getUnselectedColor(pos));
-                   // v.setBackgroundResource((R.drawable.colorpicker_unselected));
+                    v.setBackground(ColorManager.getInstance().getUnselectedColor(pos));
+
                 } else {
                 //선택함
                 //선택당한 순간 자기 이외의 놈들은 선택안하게..
-                    initImageButton(pos);
+                    initImageButton();
                     System.out.println("선택됬다. pos = "+pos);
                     isSelected[pos] = true;
-
-                 v.setBackground(ColorManager.getInstance().getSelectedColor(pos));
-               //     v.setBackgroundResource((R.drawable.colorpicker_selected));
+                    v.setBackground(ColorManager.getInstance().getSelectedColor(pos));
                 }
             }
 
         });
 
+
         return convertView;
     }
 
-    private void initImageButton(int pos){
+    private void initImageButton(){
 
         for(int i = 0; i < mImageButtonList.length ; i++){
+
             isSelected[i] = false;
-         mImageButtonList[i].setBackground(ColorManager.getInstance().getUnselectedColor(i));
+            mImageButtonList[i].setBackground(ColorManager.getInstance().getUnselectedColor(i));
+
         }
+
 
 
     }

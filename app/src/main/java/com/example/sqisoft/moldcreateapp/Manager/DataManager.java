@@ -1,7 +1,9 @@
-package com.example.sqisoft.moldcreateapp.Manager;
+package com.example.sqisoft.moldcreateapp.manager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sqisoft.moldcreateapp.view.DrawingView;
@@ -20,6 +22,11 @@ public class DataManager {
     private Bitmap mCapturingBitmap;
 
     private TextView text_X,text_Y;
+    private Context mContext;
+
+    public static String API_SERVER_URL = "http://192.168.2.119:8080";
+    private ImageView mSeletecPaletteColorView;
+    private int seletedMoldIndex;
 
     private DataManager(){
 
@@ -68,6 +75,30 @@ public class DataManager {
     }
     public TextView getText_Y(){
         return this.text_Y;
+    }
+
+    public Context getmContext() {
+        return mContext;
+    }
+
+    public void setmContext(Context mContext) {
+        this.mContext = mContext;
+    }
+
+    public ImageView getmSeletecPaletteColorView() {
+        return mSeletecPaletteColorView;
+    }
+
+    public void setmSeletecPaletteColorView(ImageView mSeletecPaletteColorView) {
+        this.mSeletecPaletteColorView = mSeletecPaletteColorView;
+    }
+
+    public int getSeletedMoldIndex() {
+        return seletedMoldIndex;
+    }
+
+    public void setSeletedMoldIndex(int seletedMoldIndex) {
+        this.seletedMoldIndex = seletedMoldIndex;
     }
 
 }

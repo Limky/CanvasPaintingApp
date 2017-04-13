@@ -1,4 +1,4 @@
-package com.example.sqisoft.moldcreateapp.Util;
+package com.example.sqisoft.moldcreateapp.util;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;

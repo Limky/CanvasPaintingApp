@@ -2,56 +2,137 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sqisoft.moldcreateapp.Fragment.FragmentMain">
+    tools:context="com.example.sqisoft.moldcreateapp.Fragment.FragmentMain"
+    android:background="@drawable/bg_2000">
 
     <LinearLayout
-        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/create_mold_button"
-        android:layout_toStartOf="@+id/create_mold_button">
+        android:layout_height="wrap_content">
 
         <TextView
+            android:layout_marginBottom="15dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="내 곰팡이를 만들어 보세요."
-            android:textSize="30dp"
+            android:text="메주 만드는 곰팡이 4총사"
+            android:textSize="42dp"
+            android:textColor="#ffffff"
             android:id="@+id/mold_intro_title_textView" />
 
-        <ImageView
-            android:paddingTop="80dp"
-            android:paddingBottom="80dp"
-            android:layout_gravity="center"
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mold_main_03"/>
-
         <TextView
+            android:layout_marginBottom="55dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="예쁜 곰팡이를 만들어 전송하면\nDisplay에서 나만의 곰팡이가 피어납니다."
-            android:textSize="20dp"
-            android:id="@+id/mold_intro_desc_textView" />
+            android:text="색칠하고 싶은 곰팡이를 선택해주세요"
+            android:textColor="#8cf9a0"
+            android:textSize="22dp"
+            android:id="@+id/mold_intro_title_textView2" />
+
+
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/mold_01_button"
+                    android:background="@drawable/image_button"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mold_01s"/>
+                <TextView
+                    android:textColor="#ffffff"
+                    android:id="@+id/mold_01_name"
+                    android:textSize="15dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="좁쌀 곰팡이"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginLeft="12.5dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/mold_02_button"
+                    android:background="@drawable/image_button"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mold_02s"/>
+                <TextView
+                    android:textColor="#ffffff"
+                    android:id="@+id/mold_02_name"
+                    android:textSize="15dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="누룩 곰팡이"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginLeft="12.5dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/mold_03_button"
+                    android:background="@drawable/image_button"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mold_03s"/>
+                <TextView
+                    android:layout_marginBottom="20dp"
+                    android:textColor="#ffffff"
+                    android:id="@+id/mold_03_name"
+                    android:textSize="15dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="좁쌀 곰팡이"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginLeft="12.5dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/mold_04_button"
+                    android:background="@drawable/image_button"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mold_04s"/>
+                <TextView
+                    android:layout_marginBottom="20dp"
+                    android:textColor="#ffffff"
+                    android:id="@+id/mold_04_name"
+                    android:textSize="15dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="털 곰팡이"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
 
     </LinearLayout>
-
-
-
-    <Button
-        android:background="#B2DFDB"
-        android:text="Start"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/create_mold_button"
-        android:width="160dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
 
 
 

@@ -10,11 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sqisoft.moldcreateapp.Manager.DataManager;
+import com.example.sqisoft.moldcreateapp.manager.DataManager;
 import com.example.sqisoft.moldcreateapp.R;
-import com.example.sqisoft.moldcreateapp.Util.FragmentUtil;
+import com.example.sqisoft.moldcreateapp.util.FragmentUtil;
 import com.example.sqisoft.moldcreateapp.view.ColorPickerGridViewAdapter;
 import com.example.sqisoft.moldcreateapp.view.DrawingView;
 import com.example.sqisoft.moldcreateapp.view.HeaderGridView;
@@ -53,6 +54,8 @@ public class FragmentDrawing extends Fragment {
     private DrawingView mDrawingView;
 
     TextView touchPad, textX, textY;
+   // private int mSeletedMold = 0;
+    private ImageView mSeletedPaletteColorView;
 
     public FragmentDrawing() {
         // Required empty public constructor
@@ -94,11 +97,7 @@ public class FragmentDrawing extends Fragment {
         // Inflate the layout for this fragment
         FragmentUtil.trace();
 
-
-        textX = (TextView) mFragmentDrawingView.findViewById(R.id.text_XX);
-        textY = (TextView) mFragmentDrawingView.findViewById(R.id.text_YY);
-
-        DataManager.getInstance().setTextXY(textX,textY);
+        DataManager.getInstance().setmSeletecPaletteColorView(mSeletedPaletteColorView);
 
         addBaseAdapter();
 
@@ -119,6 +118,28 @@ public class FragmentDrawing extends Fragment {
         mWaitingButton = (Button) mFragmentDrawingView.findViewById(R.id.waiting_mold_button);
         mWaitingButton.setOnClickListener(mWaitingButtonistener);
         mDrawingView = (DrawingView) mFragmentDrawingView.findViewById(R.id.drawing_view);
+        mSeletedPaletteColorView = (ImageView) mFragmentDrawingView.findViewById(R.id.selected_palette_color);
+
+        switch (DataManager.getInstance().getSeletedMoldIndex()){
+
+            case  1 :
+             mDrawingView.setBackgroundResource(R.drawable.mold_01b);
+            break;
+
+            case  2 :
+             mDrawingView.setBackgroundResource(R.drawable.mold_02b);
+                break;
+
+            case  3 :
+              mDrawingView.setBackgroundResource(R.drawable.mold_03b);
+                break;
+
+            case  4 :
+              mDrawingView.setBackgroundResource(R.drawable.mold_04b);
+                break;
+
+
+        }
 
     }
     private File filepath,externalFilePath;

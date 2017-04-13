@@ -1,15 +1,19 @@
 package com.example.sqisoft.moldcreateapp.Fragment;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.sqisoft.moldcreateapp.R;
-import com.example.sqisoft.moldcreateapp.Util.FragmentUtil;
+import com.example.sqisoft.moldcreateapp.manager.DataManager;
+import com.example.sqisoft.moldcreateapp.util.FragmentUtil;
 
 
 /**
@@ -71,15 +75,45 @@ public class FragmentMain extends Fragment {
         // Inflate the layout for this fragment
         mMainFragmentView = inflater.inflate(R.layout.fragment_main, container, false);
 
+
         FragmentUtil.trace();
 
-        mMainFragmentView.findViewById(R.id.create_mold_button).setOnClickListener(new View.OnClickListener() {
+        ((TextView)mMainFragmentView.findViewById(R.id.mold_intro_title_textView)).setTypeface(null, Typeface.BOLD);
+
+
+        mMainFragmentView.findViewById(R.id.mold_01_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        /*        FragmentManager manager = getActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.replaced_layout, new FragmentSelecting()).commit();*/
-                FragmentUtil.addFragment(new FragmentSelecting());
+                ((TextView)mMainFragmentView.findViewById(R.id.mold_01_name)).setTextColor(Color.parseColor("#8cf9a0"));
+                FragmentUtil.addFragment(new FragmentDrawing());
+                DataManager.getInstance().setSeletedMoldIndex(1);
+            }
+        });
+
+        mMainFragmentView.findViewById(R.id.mold_02_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((TextView)mMainFragmentView.findViewById(R.id.mold_02_name)).setTextColor(Color.parseColor("#8cf9a0"));
+                FragmentUtil.addFragment(new FragmentDrawing());
+                DataManager.getInstance().setSeletedMoldIndex(2);
+            }
+        });
+
+        mMainFragmentView.findViewById(R.id.mold_03_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((TextView)mMainFragmentView.findViewById(R.id.mold_03_name)).setTextColor(Color.parseColor("#8cf9a0"));
+                FragmentUtil.addFragment(new FragmentDrawing());
+                DataManager.getInstance().setSeletedMoldIndex(3);
+            }
+        });
+
+        mMainFragmentView.findViewById(R.id.mold_04_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((TextView)mMainFragmentView.findViewById(R.id.mold_04_name)).setTextColor(Color.parseColor("#8cf9a0"));
+                FragmentUtil.addFragment(new FragmentDrawing());
+                DataManager.getInstance().setSeletedMoldIndex(4);
             }
         });
 
