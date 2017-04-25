@@ -22,7 +22,7 @@
             android:pivotY="50%"
             android:repeatCount="infinite" />-->
 
-    <alpha android:fromAlpha="0.7"
+    <alpha android:fromAlpha="0.98"
         android:toAlpha="1.0"
         android:interpolator="@android:anim/accelerate_interpolator"
         android:duration="1800"

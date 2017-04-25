@@ -25,6 +25,12 @@ public class DataManager {
     private Context mContext;
 
     public static String API_SERVER_URL = "http://192.168.2.119:8080";
+    public static int nettype = 17; //임시 디바이스 정보 유니티에서 요청한 디바이스 타입정보.
+    public static String deviceCode = "SMA-60000";
+    public static String  targetDeviceType = "STEP011";
+
+
+
     private ImageView mSeletecPaletteColorView;
     private int seletedMoldIndex;
 

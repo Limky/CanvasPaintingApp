@@ -1,5 +1,7 @@
 package com.example.sqisoft.moldcreateapp.Activity;
 
+import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,20 +9,24 @@ import android.util.DisplayMetrics;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sqisoft.moldcreateapp.Fragment.FragmentDrawing;
 import com.example.sqisoft.moldcreateapp.Fragment.FragmentMain;
-import com.example.sqisoft.moldcreateapp.Fragment.FragmentWaitng;
+import com.example.sqisoft.moldcreateapp.Fragment.FragmentSending;
 import com.example.sqisoft.moldcreateapp.R;
 import com.example.sqisoft.moldcreateapp.manager.ColorManager;
 import com.example.sqisoft.moldcreateapp.manager.DataManager;
 import com.example.sqisoft.moldcreateapp.util.FragmentUtil;
+import com.tsengvn.typekit.Typekit;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements FragmentMain.OnFragmentInteractionListener, FragmentDrawing.OnFragmentInteractionListener,
-        FragmentWaitng.OnFragmentInteractionListener, View.OnTouchListener, GestureDetector.OnGestureListener{
+        FragmentSending.OnFragmentInteractionListener, View.OnTouchListener, GestureDetector.OnGestureListener{
 
     long backKeyPressedTime = 0;
     private Toast toast;
@@ -43,6 +49,15 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
 
         setContentView(R.layout.activity_main);
 
+        Typekit.getInstance()
+                .addNormal(Typekit.createFromAsset(this, "NotoSansCJKkr-Medium.otf"))
+                .addBold(Typekit.createFromAsset(this, "NotoSansCJKkr-Bold.otf"));
+
+
+
+     //   setGlobalFont(this, getWindow().getDecorView());
+
+
         getDPI();
 
         DataManager.getInstance().setActivity(this);
@@ -52,6 +67,13 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
         FragmentUtil.init(R.id.replaced_layout, getSupportFragmentManager());
 
         FragmentUtil.addFragment(new FragmentMain());
+
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
 
     }
 
@@ -114,16 +136,16 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
 
         if(System.currentTimeMillis() > backKeyPressedTime + 2000){
             backKeyPressedTime = System.currentTimeMillis(); //backKeyPressedTime 버튼을 누른 시간을 입력
-            toast = Toast.makeText(getApplicationContext(), "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
-            toast.show();
+        //   toast = Toast.makeText(getApplicationContext(), "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+        //    toast.show();
 
             super.onBackPressed();
             return;
         }
 
         if(System.currentTimeMillis() <= backKeyPressedTime + 2000){
-            finish();
-            toast.cancel();
+        //    finish();
+       //     toast.cancel();
         }
 
 
@@ -154,6 +176,24 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
 
     }
 
+    public static void setGlobalFont(Context context, View view){
+        if (view != null) {
+            if (view instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) view;
+                int len = vg.getChildCount();
+                for (int i = 0; i < len; i++) {
+                    View v = vg.getChildAt(i);
+                    if (v instanceof TextView) {
+                        ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf"));
+                    }
+                    setGlobalFont(context, v);
+                }
+            }
+        } else {
+
+        }
+
+    }
 
 
 }

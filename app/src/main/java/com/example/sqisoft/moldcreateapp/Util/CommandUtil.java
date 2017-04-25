@@ -8,7 +8,9 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.example.sqisoft.moldcreateapp.data.AbstractRequest;
 import com.example.sqisoft.moldcreateapp.data.ResponseListener;
-import com.example.sqisoft.moldcreateapp.domain.ResultSendingImage;
+import com.example.sqisoft.moldcreateapp.domain.DeviceInformation;
+import com.example.sqisoft.moldcreateapp.domain.ResultCustom;
+import com.example.sqisoft.moldcreateapp.domain.SendData;
 import com.example.sqisoft.moldcreateapp.manager.DataManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,45 +23,38 @@ public class CommandUtil {
 	private static DataManager dataManager =  DataManager.getInstance();
 
 	private static final String URL_SET_CUSTOMFILE = dataManager.API_SERVER_URL+"/api/custom";
-//	private static final String URL_GET_SHOOT_START_API = dataManager.API_SERVER_URL+"/api/selfi/getshootcheck";
-//	private static final String URL_SET_SHOOT_START_API = dataManager.API_SERVER_URL+"/api/selfi/setshootstart";
-//	private static final String URL_SET_MY_PICTURE_API = dataManager.API_SERVER_URL+"/api/selfi/setmypicture";
-//	private static final String URL_GET_MY_ALBUM_API = dataManager.API_SERVER_URL+"/api/selfi/getmyalbum";
-//	private static final String URL_DEL_MYALBUM_API = dataManager.API_SERVER_URL+"/api/selfi/delmypicture";
-//	private static final String URL_SET_MY_PICTURE_OPEN_API = dataManager.API_SERVER_URL+"/api/selfi/setmypictureopen";
-//	private static final String URL_GET_GALLERY_API = dataManager.API_SERVER_URL+"/api/selfi/getselfigallery";
-//	private static final String URL_SET_LIKE_PICTURE_API = dataManager.API_SERVER_URL+"/api/selfi/setlikepicture";
-//	private static final String URL_SET_SHOOT_FINISH = dataManager.API_SERVER_URL+"/api/selfi/setshootfinish";
-//	private static final String URL_GET_SELFIE_ZONE_API = dataManager.API_SERVER_URL+"/api/selfi/getselfiezone";
-
-	private static final String PARAM_REUTRN_TYPE = "returnType";
-	private static final String VALUE_RETURN_TYPE = "JSON";
-
+	private static final String URL_SET_SENDDATA = dataManager.API_SERVER_URL+"/api/send";
 
 	private static final String PARAM_DEVICECODE = "deviceCode";
-	private static final String PARAM_ZONE_ID = "zoneid";
-	private static final String PARAM_UUID = "uuid";
-	private static final String PARM_SAVETIME = "savetime";
-	private static final String PARAM_IMAGE_ID = "imageid";
-	private static final String PARAM_OPEN_FLAG = "openflag";
+	private static final String PARAM_TARGET_DEVICETYPE = "targetDeviceType";
+	private static final String PARAM_SENDDATA = "sendData";
 
-	private static final String PARAM_LATITUDE = "latitude";
-	private static final String PARAM_lONGITUDE = "longitude";
-
-	public static void setMyPictureApi(String deviceCode , Bitmap bitmap, final Listener<Integer> progress, final ResponseListener<ResultSendingImage> listener) {
-		Log.w("test","setMyPictureApi ");
+	public static void customAPI(Bitmap bitmap, final Listener<Integer> progress, final ResponseListener<ResultCustom> listener) {
+		Log.w("test","customAPI ");
 		String url = URL_SET_CUSTOMFILE;
 		HashMap<String, String > params = new HashMap<String, String>();
-		params.put(PARAM_DEVICECODE, deviceCode);
+		params.put(PARAM_DEVICECODE, DataManager.getInstance().deviceCode);
 		//params.put(PARAM_REUTRN_TYPE, VALUE_RETURN_TYPE);
 
 		android.util.Log.w("[ Input Values ",""+params.values()+" ]" );
-		multipart(url, params, "customFile", "aaa.png", bitmap, ResultSendingImage.class, progress, listener);
+		multipart(url, params, "customFile", "aaa.png", bitmap, ResultCustom.class, progress, listener);
 
 	}
 
-	/*****************************************************************************************************************************************************************************************/
+	public static void sendAPI(SendData sendData, final ResponseListener<DeviceInformation[]> listener) {
+		String url = URL_SET_SENDDATA;
+		HashMap<String, String > params = new HashMap<String, String>();
 
+		params.put(PARAM_DEVICECODE, DataManager.getInstance().deviceCode);
+		params.put(PARAM_TARGET_DEVICETYPE,  DataManager.getInstance().targetDeviceType);
+		params.put(PARAM_SENDDATA, sendData.toString());
+
+		android.util.Log.d("[ Input Values ",""+params.values()+" ]" );
+
+		post(url,params, DeviceInformation[].class, listener);
+	}
+
+	/*****************************************************************************************************************************************************************************************/
 
 	private static <U, V> void getArray(final String url, final Class<V> clazz, final ResponseListener<U> listener) {
 //		 Log.d("test", url);

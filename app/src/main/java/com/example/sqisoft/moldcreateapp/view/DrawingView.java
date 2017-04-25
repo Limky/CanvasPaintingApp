@@ -14,6 +14,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.sqisoft.moldcreateapp.R;
 import com.example.sqisoft.moldcreateapp.manager.ColorManager;
@@ -34,11 +35,11 @@ public class DrawingView extends View {
     //canvas
     private Canvas drawCanvas;
     //canvas bitmap
-    private Bitmap result;
+    private Bitmap canvasBitmap;
     //circle bitmap
     private Bitmap circleBitmap;
 
-    private Bitmap mainImage;
+    private Bitmap mBackgroundBitmap;
 
     private int width,height;
 
@@ -72,7 +73,7 @@ public class DrawingView extends View {
     @Override
     public void setBackgroundResource(int resid) {
         Log.w("setBackgroundResource ======","");
-        mainImage = BitmapFactory.decodeResource(getResources(), resid);
+        mBackgroundBitmap = BitmapFactory.decodeResource(getResources(), resid);
         super.setBackgroundResource(resid);
     }
     private int strokeRadius;
@@ -88,19 +89,18 @@ public class DrawingView extends View {
 
         seletedColor =  ColorManager.getInstance().getmSeletedColor();
 
-        isEraserOn = false;
 
         if(seletedColor.equals("#311B92")) {
-
+            isEraser = false;
             drawPaint.setColor(Color.TRANSPARENT);
             drawPaint.setAntiAlias(true);
             drawPaint.setStrokeWidth(55);
             drawPaint.setStyle(Paint.Style.STROKE);
             drawPaint.setStrokeJoin(Paint.Join.ROUND);
             drawPaint.setStrokeCap(Paint.Cap.ROUND);
-            //System.out.println("setupDrawing.init color = "+seletedColor);
+            System.out.println("setupDrawing.init color = "+seletedColor);
         }else {
-
+            isEraser = false;
             drawPaint.setColor(Color.parseColor(seletedColor));
             drawPaint.setAntiAlias(true);
             drawPaint.setStrokeWidth(55);
@@ -108,7 +108,7 @@ public class DrawingView extends View {
             drawPaint.setStrokeJoin(Paint.Join.ROUND);
             drawPaint.setStrokeCap(Paint.Cap.ROUND);
             drawPaint.setAlpha(0x70);
-            //System.out.println("setupDrawing. color = "+seletedColor);
+            System.out.println("setupDrawing. color = "+seletedColor);
         }
 
 
@@ -124,12 +124,11 @@ public class DrawingView extends View {
 
         width = w;
         height = h;
-        result = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888); //result
+        canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888); //result
 
     }
 
     Bitmap mask;
-    Canvas maskCanvas;
     @Override
     protected void onDraw(Canvas canvas) {
         //draw view
@@ -159,118 +158,116 @@ public class DrawingView extends View {
 
         }
 
-        drawCanvas = new Canvas();
 
-        drawCanvas.setBitmap(result);
+        drawCanvas = new Canvas(canvasBitmap);
 
         drawPaint.setFilterBitmap(false);
-        drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT) );
+        drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT) ); // DST_OUT DST_IN
 
         drawCanvas.drawBitmap(mask,0,0,drawPaint);
 
-
-        drawPaint.setXfermode(null);
-        if(!isEraserOn) {
-            canvas.drawBitmap(result, 0, 0, null);
+        if(!isEraser) {
+            drawPaint.setXfermode(null);
+            canvas.drawBitmap(canvasBitmap, 0, 0, null);
             canvas.drawPath(drawPath, drawPaint);
         }else{
-
+            canvas.drawBitmap(canvasBitmap, 0, 0, null);
             canvas.drawPath(drawPath, drawPaint);
         }
-
 
 
         invalidate();
     }
 
-    public void onClickUndo() {
-        if (paths.size() > 0) {
-            undonePaths.add(this.paths.remove(this.paths.size() - 1));
-            this.invalidate();
-        }
+    Boolean isEraser = false;
+    Paint eraserPaint = new Paint();
+    public void eraser() {
+        isEraser = true;
+        //eraserPaint.setColor(Color.TRANSPARENT);
+        drawPaint.setAntiAlias(true);
+        drawPaint.setStrokeWidth(55);
+        drawPaint.setStyle(Paint.Style.STROKE);
+        drawPaint.setStrokeJoin(Paint.Join.ROUND);
+        drawPaint.setStrokeCap(Paint.Cap.ROUND);
+        drawPaint.setAlpha(0x35);
 
-        else {
+        //drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR)); // 실질적인
 
-        }
-    }
-    boolean isEraserOn = false;
-    Paint mPaint = new Paint();
-    public void eraserPaint(){
-        isEraserOn = true;
 
-        mPaint.setStrokeWidth(55);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeJoin(Paint.Join.ROUND);
-        mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setAlpha(0);
-        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-        mPaint.setAntiAlias(true);
-        System.out.println("eraserPaint");
     }
 
     private ArrayList<Path> paths = new ArrayList<Path>();
     private ArrayList<Path> undonePaths = new ArrayList<Path>();
-
+    private ArrayList<Paint> paints = new ArrayList<>();
+    private ArrayList<Paint> undonepaints = new ArrayList<>();
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-//detect user touch
-        int i = 0 ;
-//        Log.w("onTouchEvent ======","");
-        float touchX = event.getX();
-        float touchY = event.getY();
+        float x = event.getX();
+        float y = event.getY();
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                drawPath.moveTo(touchX, touchY);//기준점을 x, y로 이동 시킵니다.
+                touch_start(x, y);
+                invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
-                drawPath.lineTo(touchX, touchY);//Path의 마지막에 경로를 추가 합니다.
-                
+                touch_move(x, y);
+                invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                if(isEraserOn) {
-                    drawCanvas.drawPath(drawPath, mPaint);
-                }else{
-
-                    drawCanvas.drawPath(drawPath, drawPaint);
-                }
-                    drawPath.reset();
-                   // mPaint.reset();
-
+                touch_up();
+                invalidate();
                 break;
-            default:
-                return false;
         }
-        invalidate();
         return true;
     }
 
 
-//    public void undoDraw(){
-//
-//        int i = 0;
-//        while (stack_draw_x.size() > 0){
-//            if(i == 0){
-//                drawPath.moveTo((float)stack_draw_x.pop(),(float)stack_draw_y.pop());
-//                i++;
-//            }
-//            drawPath.lineTo((float)stack_draw_x.pop(),(float)stack_draw_y.pop());
-//
-//            if(stack_draw_x.size() == 0){
-//
-//                drawPaint.setColorFilter(new PorterDuffColorFilter(Color.parseColor(seletedColor), PorterDuff.Mode.CLEAR));
-//
-//                drawCanvas.drawPath(drawPath, drawPaint);//설정한 drawPath 화면에 drawPaint
-//                drawPath.reset();//path초기화
-//
-//                invalidate();
-//
-//                 drawPaint.setColor(Color.parseColor(seletedColor));
-//            }
-//
-//        }
-//
-//    }
+    public void onClickUndo () {
+        if (paths.size() > 0)  {
+            undonepaints.add(paints.remove(paints.size()-1));
+            undonePaths.add(paths.remove(paths.size()-1));
+
+            Toast.makeText(getContext(),"페인트 size : "+paths.size(),Toast.LENGTH_SHORT).show();
+            invalidate();
+        } else  {
+            Toast.makeText(getContext(),"더이상 페인트통에 페인트가 없다.",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private float mX, mY;
+    private static final float TOUCH_TOLERANCE = 4;
+    private void touch_start(float x, float y) {
+        drawPath.reset();
+        drawPath.moveTo(x, y);
+        mX = x;
+        mY = y;
+    }
+
+    private void touch_move(float x, float y) {
+        float dx = Math.abs(x - mX);
+        float dy = Math.abs(y - mY);
+        if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+            drawPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
+            mX = x;
+            mY = y;
+        }
+
+    }
+
+    private void touch_up() {
+        drawPath.lineTo(mX, mY);
+        if(!isEraser) {
+            drawCanvas.drawPath(drawPath, drawPaint);
+        }else{
+            drawCanvas.drawPath(drawPath, drawPaint);
+        }
+
+        drawPath.reset();
+
+    }
+
 
 
 }

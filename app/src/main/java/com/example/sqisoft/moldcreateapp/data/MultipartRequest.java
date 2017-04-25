@@ -52,7 +52,7 @@ public class MultipartRequest extends UTF8Request {
 
     public byte[] bitmapToByteArray(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(CompressFormat.JPEG, 80, stream);
+        bitmap.compress(CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
         return byteArray;
     }

@@ -19,11 +19,12 @@
             android:layout_marginTop="84dp"
             android:orientation="vertical"
             android:layout_width="540dp"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/linearLayout">
+
 
             <ImageView
                 android:layout_gravity="center"
@@ -31,10 +32,17 @@
                 android:layout_width="270dp"
                 android:layout_height="150dp"
             />
+            <Button
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="100dp"
+                android:background="@drawable/eraser"
+                android:id="@+id/undo_button"
+                android:layout_width="70dp"
+                android:layout_height="70dp" />
 
             <com.example.sqisoft.moldcreateapp.view.HeaderGridView
                 android:layout_gravity="center"
-                android:layout_marginTop="84dp"
+                android:layout_marginTop="24dp"
                 android:numColumns="5"
                 android:id="@+id/colorpicker_list"
                 android:layout_height="wrap_content"
@@ -46,10 +54,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
-
             <Button
                 android:layout_gravity="center"
-                android:layout_marginTop="84dp"
+                android:layout_marginTop="44dp"
                 android:id="@+id/waiting_mold_button"
                 android:layout_width="330dp"
                 android:layout_height="100dp"

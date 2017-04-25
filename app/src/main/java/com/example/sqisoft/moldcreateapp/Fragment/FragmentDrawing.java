@@ -46,6 +46,7 @@ public class FragmentDrawing extends Fragment {
     private Button mWaitingButton;
 
     private ImageButton img;
+    private Button mUndoButton;
     private boolean isSelected = false;
 
     private HeaderGridView gridView;
@@ -120,6 +121,9 @@ public class FragmentDrawing extends Fragment {
         mDrawingView = (DrawingView) mFragmentDrawingView.findViewById(R.id.drawing_view);
         mSeletedPaletteColorView = (ImageView) mFragmentDrawingView.findViewById(R.id.selected_palette_color);
 
+        mUndoButton = (Button) mFragmentDrawingView.findViewById(R.id.undo_button);
+        mUndoButton.setOnClickListener(mUndoButtonListener);
+
         switch (DataManager.getInstance().getSeletedMoldIndex()){
 
             case  1 :
@@ -151,9 +155,20 @@ public class FragmentDrawing extends Fragment {
             mDrawingView.setDrawingCacheEnabled(true);
             Bitmap b = mDrawingView.getDrawingCache();
         //    DataManager.getInstance().setmCapturingBitmap(b.copy(b.getConfig(),true));
-            FragmentUtil.addFragment(new FragmentWaitng(b.copy(b.getConfig(),true) ));
+            FragmentUtil.addFragment(new FragmentSending(b.copy(b.getConfig(),true) ));
         }
     };
+
+    private Button.OnClickListener mUndoButtonListener = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+       mDrawingView.eraser();
+            //mDrawingView.onClickUndo();
+
+        }
+    };
+
 
 
 

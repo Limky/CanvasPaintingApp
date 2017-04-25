@@ -73,12 +73,12 @@ public class ColorPickerGridViewAdapter  extends BaseAdapter {
             mViewHolder.mImageButton = (ImageButton) convertView.findViewById(R.id.color_radio_button);
 
              Log.w("mImageButtonList ================= ",""+pos);
-             mViewHolder.mImageButton.setBackground(ColorManager.getInstance().getUnselectedColor(pos));
 
-            mViewHolder.mImageButton.setClickable(true);
+                mViewHolder.mImageButton.setBackground(ColorManager.getInstance().getUnselectedColor(pos));
+                //mViewHolder.mImageButton.setClickable(true);
+            if(!bugFlag)
+                mImageButtonList[pos] = mViewHolder.mImageButton;
 
-
-            mImageButtonList[pos] =  mViewHolder.mImageButton;
 
             convertView.setTag(mViewHolder);
 
@@ -105,7 +105,7 @@ public class ColorPickerGridViewAdapter  extends BaseAdapter {
                 //선택당한 순간 자기 이외의 놈들은 선택안하게..
                     initImageButton();
                     System.out.println("선택됬다. pos = "+pos);
-                    isSelected[pos] = true;
+                    isSelected[pos] = false;
                     v.setBackground(ColorManager.getInstance().getSelectedColor(pos));
                 }
             }
@@ -115,11 +115,10 @@ public class ColorPickerGridViewAdapter  extends BaseAdapter {
 
         return convertView;
     }
-
+boolean bugFlag = false;
     private void initImageButton(){
-
+        bugFlag = true;
         for(int i = 0; i < mImageButtonList.length ; i++){
-
             isSelected[i] = false;
             mImageButtonList[i].setBackground(ColorManager.getInstance().getUnselectedColor(i));
 

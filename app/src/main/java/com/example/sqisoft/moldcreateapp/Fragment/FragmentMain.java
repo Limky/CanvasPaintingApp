@@ -75,10 +75,13 @@ public class FragmentMain extends Fragment {
         // Inflate the layout for this fragment
         mMainFragmentView = inflater.inflate(R.layout.fragment_main, container, false);
 
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(), "NotoSansCJKkr-Bold.otf");
+
+
 
         FragmentUtil.trace();
 
-        ((TextView)mMainFragmentView.findViewById(R.id.mold_intro_title_textView)).setTypeface(null, Typeface.BOLD);
+        ((TextView)mMainFragmentView.findViewById(R.id.mold_intro_title_textView)).setTypeface(type);
 
 
         mMainFragmentView.findViewById(R.id.mold_01_button).setOnClickListener(new View.OnClickListener() {
