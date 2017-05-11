@@ -2,6 +2,7 @@ package com.example.sqisoft.moldcreateapp.Fragment;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -116,6 +117,7 @@ public class FragmentSending extends Fragment implements View.OnTouchListener, G
         imageView.setImageBitmap(mCapturingBitmap);
 
 
+
         arrow_imageview.startAnimation(arrowBlink);
       //  imageView.startAnimation(animFadein);
         imageView.startAnimation(moldBlink);
@@ -146,6 +148,8 @@ public class FragmentSending extends Fragment implements View.OnTouchListener, G
         textY = (TextView) mFragmentWaitngView.findViewById(R.id.text_Y);
         touchPad = (TextView) mFragmentWaitngView.findViewById(R.id.touch_pad);
         arrow_imageview = (ImageView) mFragmentWaitngView.findViewById(R.id.arrow_imageview);
+
+        ((TextView) mFragmentWaitngView.findViewById(R.id.mold_intro_title_textView2)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
 
         touchPad.setOnTouchListener(this);
     }

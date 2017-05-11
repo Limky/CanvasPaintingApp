@@ -3,9 +3,11 @@ package com.example.sqisoft.moldcreateapp.manager;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.sqisoft.moldcreateapp.R;
 import com.example.sqisoft.moldcreateapp.view.DrawingView;
 
 /**
@@ -107,4 +109,12 @@ public class DataManager {
         this.seletedMoldIndex = seletedMoldIndex;
     }
 
+    public void setEraserButton(){
+            mEraserButton.setBackgroundResource(R.drawable.palette_20_n);
+    }
+
+    public Button mEraserButton;
+    public void setEraser(Button eraserButton) {
+       this.mEraserButton = eraserButton;
+    }
 }

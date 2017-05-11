@@ -94,7 +94,7 @@ public class DrawingView extends View {
             isEraser = false;
             drawPaint.setColor(Color.TRANSPARENT);
             drawPaint.setAntiAlias(true);
-            drawPaint.setStrokeWidth(55);
+            drawPaint.setStrokeWidth(40);
             drawPaint.setStyle(Paint.Style.STROKE);
             drawPaint.setStrokeJoin(Paint.Join.ROUND);
             drawPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -103,7 +103,7 @@ public class DrawingView extends View {
             isEraser = false;
             drawPaint.setColor(Color.parseColor(seletedColor));
             drawPaint.setAntiAlias(true);
-            drawPaint.setStrokeWidth(55);
+            drawPaint.setStrokeWidth(40);
             drawPaint.setStyle(Paint.Style.STROKE);
             drawPaint.setStrokeJoin(Paint.Join.ROUND);
             drawPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -185,7 +185,7 @@ public class DrawingView extends View {
         isEraser = true;
         //eraserPaint.setColor(Color.TRANSPARENT);
         drawPaint.setAntiAlias(true);
-        drawPaint.setStrokeWidth(55);
+        drawPaint.setStrokeWidth(40);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);

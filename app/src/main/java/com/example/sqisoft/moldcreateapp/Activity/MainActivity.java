@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
         setContentView(R.layout.activity_main);
 
         Typekit.getInstance()
-                .addNormal(Typekit.createFromAsset(this, "NotoSansCJKkr-Medium.otf"))
-                .addBold(Typekit.createFromAsset(this, "NotoSansCJKkr-Bold.otf"));
+                .addNormal(Typekit.createFromAsset(this, "fonts/NotoSansCJKkr-Medium.otf"))
+                .addBold(Typekit.createFromAsset(this, "fonts/NotoSansCJKkr-Bold.otf"));
 
 
 

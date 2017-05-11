@@ -1,0 +1,84 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/shape_1">
+        <shape
+            android:shape="oval">
+            <solid
+                android:color="@android:color/transparent"/>
+            <padding
+                android:bottom="6dp"
+                android:left="6dp"
+                android:right="6dp"
+                android:top="6dp"/>
+            <stroke
+                android:width="3dp"
+                android:color="@color/color3"/>
+        </shape>
+    </item>
+    <item android:id="@+id/shape_2">
+        <shape
+            android:shape="oval">
+            <solid
+                android:color="@color/color0"/>
+            <size
+                android:width="43dp"
+                android:height="43dp"/>
+        </shape>
+
+    </item>
+</layer-list>
+
+
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:gravity="center" android:id="@+id/shape_1">
+            <shape android:shape="oval">
+                <size
+                    android:width="60dp"
+                    android:height="60dp" />
+                <stroke
+                    android:width="3dp"
+                    android:color="#e91e63" />
+            </shape>
+        </item>
+        <item
+            android:id="@+id/shape_2"
+            android:bottom="10dp"
+            android:left="10dp"
+            android:right="10dp"
+            android:top="10dp">
+            <shape android:shape="oval">
+                <size
+                    android:width="23dp"
+                    android:height="23dp" />
+                <solid android:color="#FFFFFF" />
+            </shape>
+        </item>
+    </layer-list>
+    -->
+
+<!--
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="#e91e63" />
+    <size
+        android:width="63dp"
+        android:height="63dp" />
+    <stroke
+    android:width="5dp"
+    android:color="#d2d1d2" />
+
+</shape>
+
+
+
+<size
+android:width="53dp"
+android:height="53dp" />
+<stroke
+android:width="5dp"
+android:color="#00" />
+
+-->

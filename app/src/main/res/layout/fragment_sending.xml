@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.sqisoft.moldcreateapp.Fragment.FragmentSending"
-    android:background="@drawable/bg_2200">
+    android:background="@drawable/bg_2200_1">
 
 
     <ImageView
@@ -12,14 +12,14 @@
         android:layout_height="wrap_content"
         android:background="@drawable/ic_arrow"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="74dp"/>
+        android:layout_marginTop="24dp"/>
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
         android:id="@+id/touch_pad"/>
+
     <TextView
         android:visibility="gone"
         android:textSize="30dp"
@@ -40,14 +40,6 @@
         android:text="Y 좌표"
         android:layout_gravity="center"/>
 
-    <ImageView
-        android:id="@+id/sending_imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/moldicon"
-        android:layout_gravity="center"
-        />
-
 
     <TextView
         android:layout_marginBottom="57dp"
@@ -55,9 +47,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="곰팡이를 날려 보내주세요"
-        android:textColor="#8cf9a0"
+        android:textColor="#ffffff"
         android:textSize="25dp"
         android:id="@+id/mold_intro_title_textView2" />
+
+    <ImageView
+        android:id="@+id/sending_imageView"
+        android:layout_width="800dp"
+        android:layout_height="800dp"
+        android:src="@drawable/mold_02s"
+        android:layout_gravity="center"
+        />
 
 
 </FrameLayout>

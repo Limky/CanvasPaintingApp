@@ -46,7 +46,7 @@ public class FragmentDrawing extends Fragment {
     private Button mWaitingButton;
 
     private ImageButton img;
-    private Button mUndoButton;
+    private Button mEraserButton;
     private boolean isSelected = false;
 
     private HeaderGridView gridView;
@@ -99,6 +99,7 @@ public class FragmentDrawing extends Fragment {
         FragmentUtil.trace();
 
         DataManager.getInstance().setmSeletecPaletteColorView(mSeletedPaletteColorView);
+        DataManager.getInstance().setEraser(mEraserButton);
 
         addBaseAdapter();
 
@@ -121,8 +122,8 @@ public class FragmentDrawing extends Fragment {
         mDrawingView = (DrawingView) mFragmentDrawingView.findViewById(R.id.drawing_view);
         mSeletedPaletteColorView = (ImageView) mFragmentDrawingView.findViewById(R.id.selected_palette_color);
 
-        mUndoButton = (Button) mFragmentDrawingView.findViewById(R.id.undo_button);
-        mUndoButton.setOnClickListener(mUndoButtonListener);
+        mEraserButton = (Button) mFragmentDrawingView.findViewById(R.id.undo_button);
+        mEraserButton.setOnClickListener(mUndoButtonListener);
 
         switch (DataManager.getInstance().getSeletedMoldIndex()){
 
@@ -158,12 +159,14 @@ public class FragmentDrawing extends Fragment {
             FragmentUtil.addFragment(new FragmentSending(b.copy(b.getConfig(),true) ));
         }
     };
-
+    private Boolean pressedFlag = false;
     private Button.OnClickListener mUndoButtonListener = new Button.OnClickListener() {
+
         @Override
         public void onClick(View v) {
 
-       mDrawingView.eraser();
+            mEraserButton.setBackgroundResource(R.drawable.palette_20_p);
+            mDrawingView.eraser();
             //mDrawingView.onClickUndo();
 
         }

@@ -68,16 +68,15 @@ public class ColorPickerGridViewAdapter  extends BaseAdapter {
 
             convertView = mInflater.inflate(R.layout.color_radio_buttons,parent,false);
 
-        //    Log.d("ddd","111");
+
 
             mViewHolder.mImageButton = (ImageButton) convertView.findViewById(R.id.color_radio_button);
-
              Log.w("mImageButtonList ================= ",""+pos);
+             mViewHolder.mImageButton.setBackground(ColorManager.getInstance().getUnselectedColor(pos));
 
-                mViewHolder.mImageButton.setBackground(ColorManager.getInstance().getUnselectedColor(pos));
-                //mViewHolder.mImageButton.setClickable(true);
             if(!bugFlag)
                 mImageButtonList[pos] = mViewHolder.mImageButton;
+
 
 
             convertView.setTag(mViewHolder);
@@ -88,7 +87,7 @@ public class ColorPickerGridViewAdapter  extends BaseAdapter {
         }
 
 
-
+        if(pos == 19)mViewHolder.mImageButton.setVisibility(View.GONE);
         mViewHolder.mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +102,7 @@ public class ColorPickerGridViewAdapter  extends BaseAdapter {
                 } else {
                 //선택함
                 //선택당한 순간 자기 이외의 놈들은 선택안하게..
+                    DataManager.getInstance().setEraserButton();
                     initImageButton();
                     System.out.println("선택됬다. pos = "+pos);
                     isSelected[pos] = false;
@@ -118,7 +118,7 @@ public class ColorPickerGridViewAdapter  extends BaseAdapter {
 boolean bugFlag = false;
     private void initImageButton(){
         bugFlag = true;
-        for(int i = 0; i < mImageButtonList.length ; i++){
+        for(int i = 0; i < mImageButtonList.length - 1 ; i++){
             isSelected[i] = false;
             mImageButtonList[i].setBackground(ColorManager.getInstance().getUnselectedColor(i));
 

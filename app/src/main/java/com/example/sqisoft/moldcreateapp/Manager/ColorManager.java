@@ -44,7 +44,7 @@ public class ColorManager {
 
         GradientDrawable selected2 = (GradientDrawable)layerDrawable.findDrawableByLayerId(R.id.shape_2);
         selected2.setColor(Color.parseColor(mSeletedColor));
-        selected2.setSize(75,75);
+        selected2.setSize(57,57);
 
         System.out.println("getSelectedColor. pos = "+mSeletedColor);
 
@@ -71,7 +71,7 @@ public class ColorManager {
         final GradientDrawable unselected = new GradientDrawable();
         unselected.setShape(GradientDrawable.OVAL);
         unselected.setColor(Color.parseColor(UnselectedColor));
-        unselected.setSize(100, 100);
+        unselected.setSize(70, 70);
 
         //  System.out.println("getUnselectedColor. pos = "+mSeletedColor);
 
@@ -107,11 +107,13 @@ public class ColorManager {
         mColorList[12] ="#ee36fe";//yellow
         mColorList[13] ="#ff53b4";//amber
         mColorList[14] ="#ff8f8f";//orange
-        mColorList[15] ="#ffffff";//deep_orange
-        mColorList[16] ="#a1a1a1";//brown
+        mColorList[15] ="#000000";//deep_orange
+        mColorList[16] ="#403f3f";//brown
         mColorList[17] ="#6e6e6e";//grey
-        mColorList[18] ="#403f3f";//blue_grey
+        mColorList[18] ="#ffffff";//blue_grey
         mColorList[19] ="#000000";//black
+
+
 
         mColorPaletteList[0] = R.drawable.color_01;
         mColorPaletteList[1] = R.drawable.color_02;

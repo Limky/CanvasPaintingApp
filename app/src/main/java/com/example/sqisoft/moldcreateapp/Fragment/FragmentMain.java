@@ -15,6 +15,9 @@ import com.example.sqisoft.moldcreateapp.R;
 import com.example.sqisoft.moldcreateapp.manager.DataManager;
 import com.example.sqisoft.moldcreateapp.util.FragmentUtil;
 
+import static com.example.sqisoft.moldcreateapp.R.id.mold_01_name;
+import static com.example.sqisoft.moldcreateapp.R.id.mold_intro_title_textView;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +40,7 @@ public class FragmentMain extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private View mMainFragmentView;
+    private TextView sungchangTextView,numberTextView1,numberTextView2,numberTextView3,numberTextView4,titleTextView;
 
     public FragmentMain() {
         // Required empty public constructor
@@ -75,19 +79,19 @@ public class FragmentMain extends Fragment {
         // Inflate the layout for this fragment
         mMainFragmentView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        Typeface type = Typeface.createFromAsset(getActivity().getAssets(), "NotoSansCJKkr-Bold.otf");
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(), "fonts/NotoSansCJKkr-Bold.otf");
 
 
 
         FragmentUtil.trace();
 
-        ((TextView)mMainFragmentView.findViewById(R.id.mold_intro_title_textView)).setTypeface(type);
+        ((TextView)mMainFragmentView.findViewById(mold_intro_title_textView)).setTypeface(type);
 
 
         mMainFragmentView.findViewById(R.id.mold_01_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((TextView)mMainFragmentView.findViewById(R.id.mold_01_name)).setTextColor(Color.parseColor("#8cf9a0"));
+                ((TextView)mMainFragmentView.findViewById(mold_01_name)).setTextColor(Color.parseColor("#8cf9a0"));
                 FragmentUtil.addFragment(new FragmentDrawing());
                 DataManager.getInstance().setSeletedMoldIndex(1);
             }
@@ -120,6 +124,20 @@ public class FragmentMain extends Fragment {
             }
         });
 
+
+        ((TextView) mMainFragmentView.findViewById(R.id.sunchang)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/GothamMediumRegular.ttf"));
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_intro_title_textView)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+        ((TextView) mMainFragmentView.findViewById(R.id.info_textView)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Regular.otf"));
+
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_01_index)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(),  "fonts/GothamMediumRegular.ttf"));
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_02_index)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(),  "fonts/GothamMediumRegular.ttf"));
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_03_index)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(),  "fonts/GothamMediumRegular.ttf"));
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_04_index)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(),  "fonts/GothamMediumRegular.ttf"));
+
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_01_name)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_02_name)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_03_name)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_04_name)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
 
 
         return mMainFragmentView;
