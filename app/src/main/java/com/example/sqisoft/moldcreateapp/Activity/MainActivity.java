@@ -22,7 +22,6 @@ import com.example.sqisoft.moldcreateapp.R;
 import com.example.sqisoft.moldcreateapp.manager.ColorManager;
 import com.example.sqisoft.moldcreateapp.manager.DataManager;
 import com.example.sqisoft.moldcreateapp.util.FragmentUtil;
-import com.tsengvn.typekit.Typekit;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements FragmentMain.OnFragmentInteractionListener, FragmentDrawing.OnFragmentInteractionListener,
@@ -49,22 +48,19 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
 
         setContentView(R.layout.activity_main);
 
-        Typekit.getInstance()
-                .addNormal(Typekit.createFromAsset(this, "fonts/NotoSansCJKkr-Medium.otf"))
-                .addBold(Typekit.createFromAsset(this, "fonts/NotoSansCJKkr-Bold.otf"));
-
 
 
      //   setGlobalFont(this, getWindow().getDecorView());
 
 
-        getDPI();
+       // getDPI();
 
         DataManager.getInstance().setActivity(this);
         DataManager.getInstance().setmContext(getApplicationContext());
 
         //프래그먼트 유틸(프래그먼트간 이동 공통 모듈) 초기화
         FragmentUtil.init(R.id.replaced_layout, getSupportFragmentManager());
+
 
         FragmentUtil.addFragment(new FragmentMain());
 
@@ -76,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
 
     }
+
+
 
 
     @Override

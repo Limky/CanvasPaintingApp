@@ -124,21 +124,22 @@ public class FragmentMain extends Fragment {
             }
         });
 
+    Typeface gothamtf = Typeface.createFromAsset(getActivity().getAssets(),  "fonts/GothamBoldRegular.ttf");
+        Typeface nototf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf");
 
-        ((TextView) mMainFragmentView.findViewById(R.id.sunchang)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/GothamMediumRegular.ttf"));
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_intro_title_textView)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
-        ((TextView) mMainFragmentView.findViewById(R.id.info_textView)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Regular.otf"));
+        ((TextView) mMainFragmentView.findViewById(R.id.sunchang)).setTypeface(gothamtf);
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_intro_title_textView)).setTypeface(nototf);
+        ((TextView) mMainFragmentView.findViewById(R.id.info_textView)).setTypeface(nototf);
 
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_01_index)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(),  "fonts/GothamMediumRegular.ttf"));
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_02_index)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(),  "fonts/GothamMediumRegular.ttf"));
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_03_index)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(),  "fonts/GothamMediumRegular.ttf"));
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_04_index)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(),  "fonts/GothamMediumRegular.ttf"));
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_01_index)).setTypeface(gothamtf);
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_02_index)).setTypeface(gothamtf);
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_03_index)).setTypeface(gothamtf);
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_04_index)).setTypeface(gothamtf);
 
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_01_name)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_02_name)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_03_name)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_04_name)).setTypeface(Typeface.createFromAsset(DataManager.getInstance().getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
-
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_01_name)).setTypeface(nototf);
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_02_name)).setTypeface(nototf);
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_03_name)).setTypeface(nototf);
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_04_name)).setTypeface(nototf);
 
         return mMainFragmentView;
 

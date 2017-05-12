@@ -15,7 +15,8 @@
             android:text="SUNCHANG MEDIA ART"
             android:textColor="#8cf9a0"
             android:textSize="17dp"
-            android:id="@+id/sunchang"/>
+            android:id="@+id/sunchang"
+            android:typeface="monospace"/>
 
     <TextView
         android:layout_marginTop="17dp"
@@ -26,7 +27,8 @@
         android:textColor="#ffffff"
         android:id="@+id/mold_intro_title_textView"
         android:layout_below="@+id/sunchang"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:typeface="serif"/>
 
 
         <ImageView
@@ -40,7 +42,8 @@
            android:background="#ffffff"/>
 
 
-        <TextView
+    <TextView
+        android:typeface="serif"
             android:layout_marginTop="18dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/underbar"
@@ -62,7 +65,7 @@
        android:id="@+id/relativeLayout">
 
        <RelativeLayout
-           android:layout_marginLeft="170dp"
+           android:layout_marginLeft="167dp"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content">
         <RelativeLayout
@@ -73,7 +76,7 @@
                 android:id="@+id/mold_01_button"
                 android:src="@drawable/image_button"
                 android:layout_gravity="center"
-                android:layout_width="343dp"
+                android:layout_width="345dp"
                 android:layout_height="341dp"
                 android:background="@drawable/mold_01s"/>
             <TextView
@@ -83,13 +86,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="01."
+                android:typeface="monospace"
                 android:textColor="#19dca9"
                 android:textSize="40dp"/>
             <TextView
+                android:typeface="serif"
                 android:id="@+id/mold_01_name"
-
+                android:layout_marginTop="10dp"
                 android:textColor="#ffffff"
-               android:textSize="24.5dp"
+                android:textSize="24.5dp"
                 android:layout_below="@+id/mold_01_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +102,7 @@
         </RelativeLayout>
 
        <RelativeLayout
-           android:layout_marginLeft="91dp"
+           android:layout_marginLeft="90dp"
            android:id="@+id/mold_layout_02"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -107,7 +112,7 @@
                android:id="@+id/mold_02_button"
                android:src="@drawable/image_button"
                android:layout_gravity="center"
-               android:layout_width="343dp"
+               android:layout_width="345dp"
                android:layout_height="341dp"
                android:background="@drawable/mold_02s"/>
            <TextView
@@ -117,9 +122,11 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="02."
+               android:typeface="monospace"
                android:textColor="#19dca9"
                android:textSize="40dp"/>
            <TextView
+               android:typeface="serif"
                android:id="@+id/mold_02_name"
                android:layout_marginTop="10dp"
                android:textColor="#ffffff"
@@ -131,7 +138,7 @@
        </RelativeLayout>
 
        <RelativeLayout
-           android:layout_marginLeft="91dp"
+           android:layout_marginLeft="90dp"
            android:id="@+id/mold_layout_03"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -141,7 +148,7 @@
                android:id="@+id/mold_03_button"
                android:src="@drawable/image_button"
                android:layout_gravity="center"
-               android:layout_width="343dp"
+               android:layout_width="345dp"
                android:layout_height="341dp"
                android:background="@drawable/mold_03s"/>
            <TextView
@@ -151,9 +158,11 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="03."
+               android:typeface="monospace"
                android:textColor="#19dca9"
                android:textSize="40dp"/>
            <TextView
+               android:typeface="serif"
                android:id="@+id/mold_03_name"
                android:layout_marginTop="10dp"
                android:textColor="#ffffff"
@@ -165,7 +174,7 @@
        </RelativeLayout>
 
        <RelativeLayout
-           android:layout_marginLeft="91dp"
+           android:layout_marginLeft="90dp"
            android:id="@+id/mold_layout_04"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -175,7 +184,7 @@
                android:id="@+id/mold_04_button"
                android:src="@drawable/image_button"
                android:layout_gravity="center"
-               android:layout_width="343dp"
+               android:layout_width="345dp"
                android:layout_height="341dp"
                android:background="@drawable/mold_04s"/>
            <TextView
@@ -185,9 +194,11 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="04."
+               android:typeface="monospace"
                android:textColor="#19dca9"
                android:textSize="40dp"/>
            <TextView
+               android:typeface="serif"
                android:id="@+id/mold_04_name"
                android:layout_marginTop="10dp"
                android:textColor="#ffffff"

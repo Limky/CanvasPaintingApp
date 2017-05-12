@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/ic_arrow"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="15dp"/>
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -53,8 +53,8 @@
 
     <ImageView
         android:id="@+id/sending_imageView"
-        android:layout_width="800dp"
-        android:layout_height="800dp"
+        android:layout_width="700dp"
+        android:layout_height="700dp"
         android:src="@drawable/mold_02s"
         android:layout_gravity="center"
         />
