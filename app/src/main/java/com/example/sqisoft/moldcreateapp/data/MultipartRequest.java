@@ -51,11 +51,16 @@ public class MultipartRequest extends UTF8Request {
     }
 
     public byte[] bitmapToByteArray(Bitmap bitmap) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
-    }
+      ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+      //비트맵 이미지 스케일 추가 2017-07-17
+      bitmap =  Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() /3, bitmap.getHeight() / 3, true);
+
+      bitmap.compress(CompressFormat.PNG, 100, stream);
+
+      byte[] byteArray = stream.toByteArray();
+      return byteArray;
+  }
 
     @Override
     public String getBodyContentType() {

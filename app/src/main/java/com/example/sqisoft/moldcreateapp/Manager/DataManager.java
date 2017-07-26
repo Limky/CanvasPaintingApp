@@ -3,6 +3,7 @@ package com.example.sqisoft.moldcreateapp.manager;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,15 +27,19 @@ public class DataManager {
     private TextView text_X,text_Y;
     private Context mContext;
 
-    public static String API_SERVER_URL = "http://192.168.2.2:8080";
-    public static int nettype = 17; //임시 디바이스 정보 유니티에서 요청한 디바이스 타입정보.
+    public static String API_SERVER_URL = "http://192.168.2.200:8000";
+    public static int nettype = 30; //임시 디바이스 정보 유니티에서 요청한 디바이스 타입정보.
     public static String deviceCode = "SMA-60000";
     public static String  targetDeviceType = "STEP011";
 
 
+    public Typeface notoOtf;
+    public Typeface gothamOtf;
 
     private ImageView mSeletecPaletteColorView;
     private int seletedMoldIndex;
+
+    private boolean wifiConnect = false;
 
     private DataManager(){
 
@@ -56,6 +61,22 @@ public class DataManager {
 
     }
 
+
+
+    public Typeface getNotoOtf() {
+        return notoOtf;
+    }
+
+    public void setNotoOtf(Typeface notoOtf) {
+        this.notoOtf = notoOtf;
+    }
+    public Typeface getGothamOtf() {
+        return gothamOtf;
+    }
+
+    public void setGothamOtf(Typeface gothamOtf) {
+        this.gothamOtf = gothamOtf;
+    }
     public DrawingView getmDrawingView() {
 
         //System.out.println("데이타 메니져 getmDrawingView. pos = 호출 ");
@@ -110,11 +131,21 @@ public class DataManager {
     }
 
     public void setEraserButton(){
-            mEraserButton.setBackgroundResource(R.drawable.palette_20_n);
+        mEraserButton.setBackgroundResource(R.drawable.palette_20_n);
     }
 
     public Button mEraserButton;
     public void setEraser(Button eraserButton) {
-       this.mEraserButton = eraserButton;
+        this.mEraserButton = eraserButton;
     }
+
+    public boolean isWifiConnect() {
+        return wifiConnect;
+    }
+
+    public void setWifiConnect(boolean wifiConnect) {
+        this.wifiConnect = wifiConnect;
+    }
+
+
 }

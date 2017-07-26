@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,9 +14,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.sqisoft.moldcreateapp.Activity.MainActivity;
 import com.example.sqisoft.moldcreateapp.manager.DataManager;
 import com.example.sqisoft.moldcreateapp.R;
-import com.example.sqisoft.moldcreateapp.util.FragmentUtil;
+import com.example.sqisoft.moldcreateapp.moldutil.FragmentUtil;
 import com.example.sqisoft.moldcreateapp.view.ColorPickerGridViewAdapter;
 import com.example.sqisoft.moldcreateapp.view.DrawingView;
 import com.example.sqisoft.moldcreateapp.view.HeaderGridView;
@@ -43,10 +45,10 @@ public class FragmentDrawing extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private View mFragmentDrawingView;
-    private Button mWaitingButton;
+    private Button mSendingButton;
 
     private ImageButton img;
-    private Button mEraserButton;
+    private Button mEraserButton,mBackButton;
     private boolean isSelected = false;
 
     private HeaderGridView gridView;
@@ -56,7 +58,8 @@ public class FragmentDrawing extends Fragment {
 
     TextView touchPad, textX, textY;
    // private int mSeletedMold = 0;
-    private ImageView mSeletedPaletteColorView;
+    private ImageView mSeletedPaletteColorView, mMolde_image;
+    private TextView mMoldNameTextView, mMoldDescTextView;
 
     public FragmentDrawing() {
         // Required empty public constructor
@@ -105,8 +108,37 @@ public class FragmentDrawing extends Fragment {
 
         DataManager.getInstance().setmDrawingView(mDrawingView);
 
+       // gridView.setEnabled(false);
+
+
+        mDrawingView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+
+                    case MotionEvent.ACTION_DOWN:
+                   mColorPickerGridViewAdapter.unTouch(true);
+                        break;
+
+                    case MotionEvent.ACTION_MOVE:
+
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    mColorPickerGridViewAdapter.unTouch(false);
+                        break;
+
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+
         return mFragmentDrawingView;
     }
+
+
 
 
     private void addBaseAdapter(){
@@ -117,30 +149,54 @@ public class FragmentDrawing extends Fragment {
 
 
     private void attachViewAndListener(){
-        mWaitingButton = (Button) mFragmentDrawingView.findViewById(R.id.waiting_mold_button);
-        mWaitingButton.setOnClickListener(mWaitingButtonistener);
+        mSendingButton = (Button) mFragmentDrawingView.findViewById(R.id.sending_mold_button);
+        mSendingButton.setOnClickListener(mSendingButtonistener);
         mDrawingView = (DrawingView) mFragmentDrawingView.findViewById(R.id.drawing_view);
         mSeletedPaletteColorView = (ImageView) mFragmentDrawingView.findViewById(R.id.selected_palette_color);
 
+        mMoldNameTextView = (TextView)  mFragmentDrawingView.findViewById(R.id.mold_name);
+        mMoldDescTextView = (TextView)  mFragmentDrawingView.findViewById(R.id.mold_desc);
+
+        mMolde_image = (ImageView) mFragmentDrawingView.findViewById(R.id.molde_image);
+
+        mMoldNameTextView.setTypeface(DataManager.getInstance().getNotoOtf());
+        mMoldDescTextView.setTypeface(DataManager.getInstance().getNotoOtf());
+
         mEraserButton = (Button) mFragmentDrawingView.findViewById(R.id.undo_button);
         mEraserButton.setOnClickListener(mUndoButtonListener);
+
+        mBackButton = (Button) mFragmentDrawingView.findViewById(R.id.backButton);
+        mBackButton.setOnClickListener(mBackButtonListener);
 
         switch (DataManager.getInstance().getSeletedMoldIndex()){
 
             case  1 :
              mDrawingView.setBackgroundResource(R.drawable.mold_01b);
+                mMoldNameTextView.setText("좁쌀 곰팡이");
+                mMoldDescTextView.setText(getResources().getString(R.string.selected_mold_01_desc));
+                mMolde_image.setImageResource(R.drawable.mold_2100_img_01);
+
             break;
 
             case  2 :
              mDrawingView.setBackgroundResource(R.drawable.mold_02b);
+                mMoldNameTextView.setText("누룩 곰팡이");
+                mMoldDescTextView.setText(getResources().getString(R.string.selected_mold_02_desc));
+                mMolde_image.setImageResource(R.drawable.mold_2100_img_02);
                 break;
 
             case  3 :
               mDrawingView.setBackgroundResource(R.drawable.mold_03b);
+                mMoldNameTextView.setText("솜사탕 곰팡이");
+                mMoldDescTextView.setText(getResources().getString(R.string.selected_mold_03_desc));
+                mMolde_image.setImageResource(R.drawable.mold_2100_img_03);
                 break;
 
             case  4 :
               mDrawingView.setBackgroundResource(R.drawable.mold_04b);
+                mMoldNameTextView.setText("털 곰팡이");
+                mMoldDescTextView.setText(getResources().getString(R.string.selected_mold_04_desc));
+                mMolde_image.setImageResource(R.drawable.mold_2100_img_04);
                 break;
 
 
@@ -149,7 +205,7 @@ public class FragmentDrawing extends Fragment {
     }
     private File filepath,externalFilePath;
 
-    private Button.OnClickListener mWaitingButtonistener = new Button.OnClickListener() {
+    private Button.OnClickListener mSendingButtonistener = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
 
@@ -164,7 +220,7 @@ public class FragmentDrawing extends Fragment {
 
         @Override
         public void onClick(View v) {
-
+            mColorPickerGridViewAdapter.initImageButton();
             mEraserButton.setBackgroundResource(R.drawable.palette_20_p);
             mDrawingView.eraser();
             //mDrawingView.onClickUndo();
@@ -172,6 +228,16 @@ public class FragmentDrawing extends Fragment {
         }
     };
 
+
+    private Button.OnClickListener mBackButtonListener = new Button.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+
+            ((MainActivity)(DataManager.getInstance().getActivity())).backButtonFunction();
+
+        }
+    };
 
 
 

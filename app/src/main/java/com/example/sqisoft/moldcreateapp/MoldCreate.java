@@ -21,7 +21,7 @@ public class MoldCreate extends Application {
 
 
         setDefaultFont(this, "SERIF", "fonts/NotoSansCJKkr-Medium.otf");
-        setDefaultFont(this, "MONOSPACE", "fonts/Gotham-Medium.otf");
+       // setDefaultFont(this, "MONOSPACE", "fonts/Gotham-Medium.otf");
 
       //  setDefaultFont(this, "SANS_SERIF", "Gotham-Medium.otf");
      //   setDefaultFont(this, "DEFAULT", "fonts/NotoSansCJKkr-Medium.otf");

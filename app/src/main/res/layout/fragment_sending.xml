@@ -40,6 +40,15 @@
         android:text="Y 좌표"
         android:layout_gravity="center"/>
 
+    <TextView
+        android:visibility="invisible"
+        android:textColor="#ffffff"
+        android:textSize="35dp"
+        android:layout_gravity="center"
+        android:id="@+id/send_information_textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="앞에 화면을 바라봐주세요."/>
 
     <TextView
         android:layout_marginBottom="57dp"
@@ -49,7 +58,7 @@
         android:text="곰팡이를 날려 보내주세요"
         android:textColor="#ffffff"
         android:textSize="25dp"
-        android:id="@+id/mold_intro_title_textView2" />
+        android:id="@+id/send_information_textview" />
 
     <ImageView
         android:id="@+id/sending_imageView"

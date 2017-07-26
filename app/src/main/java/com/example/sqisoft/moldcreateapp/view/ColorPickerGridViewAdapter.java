@@ -116,14 +116,27 @@ public class ColorPickerGridViewAdapter  extends BaseAdapter {
         return convertView;
     }
 boolean bugFlag = false;
-    private void initImageButton(){
+    public void initImageButton(){
         bugFlag = true;
         for(int i = 0; i < mImageButtonList.length - 1 ; i++){
             isSelected[i] = false;
             mImageButtonList[i].setBackground(ColorManager.getInstance().getUnselectedColor(i));
 
         }
+    }
 
+    public void unTouch(boolean untouch){
+        if( mImageButtonList[19] != null)
+            if(untouch){
+                for(int i = 0; i < mImageButtonList.length - 1 ; i++) {
+                    mImageButtonList[i].setEnabled(false);
+                }
+            }else{
+
+                for(int i = 0; i < mImageButtonList.length - 1 ; i++) {
+                    mImageButtonList[i].setEnabled(true);
+                }
+            }
 
 
     }

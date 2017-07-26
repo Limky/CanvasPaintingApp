@@ -10,9 +10,11 @@
     <string name="selected_mold_03_title">곰팡이3 이름</string>
     <string name="selected_mold_04_title">곰팡이4 이름</string>
 
-    <string name="selected_mold_01_desc">된장,간장류 제조에 사용하는 누룩,곰팡이의 대표 균으로 단백질 분해 효소 생선 능력이 뛰어난 균입니다. 설명1</string>
-    <string name="selected_mold_02_desc">Sporangium(포자낭)이 columella(중축)를 완전히 둘러싸지 않고 중간쯤부터 둘러싸기 때문에 포자낭이 중축모양으로 인하여 아치형문처럼 보이는데서 유래. 설명2</string>
-    <string name="selected_mold_03_desc">Lichtheimia corymbifera가 표준종이며 37도씨에서도 잘 자라는 고온성 균 그룹으로 최근에 Absidia속 으로부터 독립됨. 설명3</string>
-    <string name="selected_mold_04_desc">메주, 누룩 등에서 마치 솜사탕처럼 흰색으로 뭉실뭉실 자라므로 솜사탕곰팡이로 명명하기를 제안 설명4</string>
+    <string name="selected_mold_01_desc">건조한 곳에서도 잘 자라며 세계적으로 분포하는 곰팡이 균으로, 숙성햄과 살라미, 염장어류, 건어물 등에서 발견됩니다. 가다랭이와 생선용 소스를 만들 때 종균으로 사용하고 있어요</string>
+    <string name="selected_mold_02_desc">단백질 소화제를 생성능력이 있어 양조공업(술, 된장, 간장 등의 발효)에 널리 이용되는 곰팡이 균입니다.주로 쌀누룩이나 보리누룩을 만드는데 쓰이며, 흰색, 검은색, 갈색 등 다양한 색을 가지고 있어요</string>
+    <string name="selected_mold_03_desc">비교적 따듯한 곳에서 살며, 열대와 아열대 지방의 흙과 곡물, 과일에서 잘자라는 곰팡이 균입니다.</string>
+    <string name="selected_mold_04_desc">과일, 야채, 밀 등 곡물에서 자라나는 곰팡이균으로, 우리 주변서 쉽게 볼 수 있어요 전분 당화력이 강하고 알코올 발효력이 있어 양조 공업에 널리 이용되고 있습니다.</string>
+
+
 
 </resources>

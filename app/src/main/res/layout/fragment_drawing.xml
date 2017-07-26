@@ -4,7 +4,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.sqisoft.moldcreateapp.Fragment.FragmentDrawing"
     >
-
+    <Button
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="70dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/backButton"
+        android:background="@drawable/backbutton"
+        />
 
     <RelativeLayout
         android:background="@drawable/bg_2100_1"
@@ -14,13 +21,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-
         <LinearLayout
+            android:layout_marginTop="160dp"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout"
-            android:layout_marginRight="140dp"
+            android:layout_marginRight="163dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true">
 
@@ -35,7 +42,7 @@
 
             <com.example.sqisoft.moldcreateapp.view.HeaderGridView
                 android:layout_gravity="center"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="95dp"
                 android:numColumns="5"
                 android:id="@+id/colorpicker_list"
                 android:layout_height="wrap_content"
@@ -57,18 +64,54 @@
 
 
             <Button
-                android:id="@+id/waiting_mold_button"
+                android:theme="@style/MyButton"
+                android:layout_marginTop="50dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/sending_mold_button"
                 android:layout_gravity="center"
-                android:layout_marginTop="44dp"
-                android:layout_width="400dp"
-                android:layout_height="100dp"
-                android:background="@drawable/send_button"
+                android:layout_width="420dp"
+                android:padding="25dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sendbutton"
                 android:text="곰팡이 보내기"
-                android:textSize="20dp"
-                android:paddingBottom="20dp"
+                android:textSize="30dp"
                 android:textColor="#0b5b55"
                 />
 
+            <RelativeLayout
+                android:layout_marginTop="110dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <ImageView
+                android:paddingTop="3dp"
+                android:layout_marginRight="40dp"
+                android:id="@+id/molde_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mold_2100_img_01"/>
+
+                <TextView
+                    android:typeface="serif"
+                    android:layout_marginTop="-10dp"
+                    android:textSize="21dp"
+                    android:textColor="#ffffff"
+                    android:id="@+id/mold_name"
+                    android:layout_toRightOf="@+id/molde_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="곰팡이 이름"/>
+                <TextView
+                    android:typeface="serif"
+                    android:textSize="16dp"
+                    android:id="@+id/mold_desc"
+                    android:textColor="#ffffff"
+                    android:layout_marginTop="40dp"
+                    android:layout_toRightOf="@+id/molde_image"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/selected_mold_01_desc"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
 

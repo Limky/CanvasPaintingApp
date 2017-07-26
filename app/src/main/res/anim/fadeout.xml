@@ -4,13 +4,13 @@
     <alpha
         android:duration="1000"
         android:fromAlpha="1.0"
-
+        android:repeatCount="infinite"
         android:toAlpha="0.0" />
 
-    <translate
-        android:duration="1000"
-        android:fromYDelta="100"
+    <!--<translate-->
+        <!--android:duration="1000"-->
+        <!--android:fromYDelta="100"-->
 
-        android:toYDelta="50" />
+        <!--android:toYDelta="50" />-->
 
 </set>

@@ -189,7 +189,7 @@ public class DrawingView extends View {
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
-        drawPaint.setAlpha(0x35);
+        drawPaint.setAlpha(0x75);
 
         //drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR)); // 실질적인
 

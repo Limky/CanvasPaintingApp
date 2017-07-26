@@ -2,7 +2,6 @@ package com.example.sqisoft.moldcreateapp.Fragment;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,12 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.sqisoft.moldcreateapp.Activity.MainActivity;
 import com.example.sqisoft.moldcreateapp.R;
 import com.example.sqisoft.moldcreateapp.manager.DataManager;
-import com.example.sqisoft.moldcreateapp.util.FragmentUtil;
+import com.example.sqisoft.moldcreateapp.moldutil.FragmentUtil;
 
 import static com.example.sqisoft.moldcreateapp.R.id.mold_01_name;
-import static com.example.sqisoft.moldcreateapp.R.id.mold_intro_title_textView;
 
 
 /**
@@ -70,27 +69,27 @@ public class FragmentMain extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        }}
 
-    @Override
+
+
+        @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mMainFragmentView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        Typeface type = Typeface.createFromAsset(getActivity().getAssets(), "fonts/NotoSansCJKkr-Bold.otf");
-
 
 
         FragmentUtil.trace();
-
-        ((TextView)mMainFragmentView.findViewById(mold_intro_title_textView)).setTypeface(type);
 
 
         mMainFragmentView.findViewById(R.id.mold_01_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //다른 프래그먼트가면 초기화
+                ((MainActivity)(DataManager.getInstance().getActivity())).appFinish_touchSum = 0;
+                ((MainActivity)(DataManager.getInstance().getActivity())).timeConfig_toushSum = 0;
                 ((TextView)mMainFragmentView.findViewById(mold_01_name)).setTextColor(Color.parseColor("#8cf9a0"));
                 FragmentUtil.addFragment(new FragmentDrawing());
                 DataManager.getInstance().setSeletedMoldIndex(1);
@@ -100,6 +99,9 @@ public class FragmentMain extends Fragment {
         mMainFragmentView.findViewById(R.id.mold_02_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //다른 프래그먼트가면 초기화
+                ((MainActivity)(DataManager.getInstance().getActivity())).appFinish_touchSum = 0;
+                ((MainActivity)(DataManager.getInstance().getActivity())).timeConfig_toushSum = 0;
                 ((TextView)mMainFragmentView.findViewById(R.id.mold_02_name)).setTextColor(Color.parseColor("#8cf9a0"));
                 FragmentUtil.addFragment(new FragmentDrawing());
                 DataManager.getInstance().setSeletedMoldIndex(2);
@@ -109,6 +111,9 @@ public class FragmentMain extends Fragment {
         mMainFragmentView.findViewById(R.id.mold_03_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //다른 프래그먼트가면 초기화
+                ((MainActivity)(DataManager.getInstance().getActivity())).appFinish_touchSum = 0;
+                ((MainActivity)(DataManager.getInstance().getActivity())).timeConfig_toushSum = 0;
                 ((TextView)mMainFragmentView.findViewById(R.id.mold_03_name)).setTextColor(Color.parseColor("#8cf9a0"));
                 FragmentUtil.addFragment(new FragmentDrawing());
                 DataManager.getInstance().setSeletedMoldIndex(3);
@@ -118,28 +123,35 @@ public class FragmentMain extends Fragment {
         mMainFragmentView.findViewById(R.id.mold_04_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //다른 프래그먼트가면 초기화
+                ((MainActivity)(DataManager.getInstance().getActivity())).appFinish_touchSum = 0;
+                ((MainActivity)(DataManager.getInstance().getActivity())).timeConfig_toushSum = 0;
                 ((TextView)mMainFragmentView.findViewById(R.id.mold_04_name)).setTextColor(Color.parseColor("#8cf9a0"));
                 FragmentUtil.addFragment(new FragmentDrawing());
                 DataManager.getInstance().setSeletedMoldIndex(4);
             }
         });
 
-    Typeface gothamtf = Typeface.createFromAsset(getActivity().getAssets(),  "fonts/GothamBoldRegular.ttf");
-        Typeface nototf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf");
+//        Typeface gothamtf = Typeface.createFromAsset(getActivity().getAssets(),  "fonts/GothamBoldRegular.ttf");
+//        Typeface nototf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/NotoSansCJKkr-Medium.otf");
+//
+//        DataManager.getInstance().setNotoOtf(nototf);
 
-        ((TextView) mMainFragmentView.findViewById(R.id.sunchang)).setTypeface(gothamtf);
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_intro_title_textView)).setTypeface(nototf);
-        ((TextView) mMainFragmentView.findViewById(R.id.info_textView)).setTypeface(nototf);
 
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_01_index)).setTypeface(gothamtf);
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_02_index)).setTypeface(gothamtf);
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_03_index)).setTypeface(gothamtf);
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_04_index)).setTypeface(gothamtf);
 
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_01_name)).setTypeface(nototf);
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_02_name)).setTypeface(nototf);
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_03_name)).setTypeface(nototf);
-        ((TextView) mMainFragmentView.findViewById(R.id.mold_04_name)).setTypeface(nototf);
+        ((TextView) mMainFragmentView.findViewById(R.id.sunchang)).setTypeface( DataManager.getInstance().getGothamOtf());
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_intro_title_textView)).setTypeface(  DataManager.getInstance().getNotoOtf());
+        ((TextView) mMainFragmentView.findViewById(R.id.info_textView)).setTypeface(  DataManager.getInstance().getNotoOtf());
+
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_01_index)).setTypeface( DataManager.getInstance().getGothamOtf());
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_02_index)).setTypeface( DataManager.getInstance().getGothamOtf());
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_03_index)).setTypeface( DataManager.getInstance().getGothamOtf());
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_04_index)).setTypeface( DataManager.getInstance().getGothamOtf());
+
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_01_name)).setTypeface(  DataManager.getInstance().getNotoOtf());
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_02_name)).setTypeface(  DataManager.getInstance().getNotoOtf());
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_03_name)).setTypeface(  DataManager.getInstance().getNotoOtf());
+        ((TextView) mMainFragmentView.findViewById(R.id.mold_04_name)).setTypeface(  DataManager.getInstance().getNotoOtf());
 
         return mMainFragmentView;
 
