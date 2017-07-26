@@ -1,1 +1,1 @@
-# SunchangMediaArtApp
+# Android Canvas Painting App
